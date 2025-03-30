@@ -2,10 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="icon"
+    href="https://cdn.pixabay.com/photo/2016/09/01/09/31/pokemon-1635610_960_720.png"
+  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/style.css">
     <title>pokemon</title>
 </head>
 <body>
+    <div id="app">
+      <h1>Pokédex</h1>
     
+      <input type="text" id="search" placeholder="Digite o nome ou número do Pokémon">
+      <button onclick="searchPokemon()">Buscar</button>
+  
+      <div id="pokemon-container"></div>
+  
+    </div>
+    <script type="script" src="/src/main.js"></script>
 </body>
 </html>

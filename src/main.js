@@ -5,14 +5,45 @@ document.addEventListener('DOMContentLoaded',function(){
 
     let header = document.querySelector('header')
     header.style.backgroundColor="#ffcb05"
-    header.style.padding='20px'
-    header.style.fontSize="24px"
+    header.style.padding='5rem'
+    header.style.fontSize="2.5rem"
     header.style.color="#2a75bb"
 
- let.searchBar = document.querySelector('.search-bar')
- searchBar.style.margin="20px"
+    
+    let searchBar = document.getElementById('search-bar')
+    searchBar.style.margin= '2rem'
+
+ let input = document.getElementById("search")
+input.style.padding = "1rem"
+input.style.width ="25rem"
+
+let button = document.querySelector('.search-btn')
+button.style.padding ="1rem 2rem"
+button.style.backgroundColor='#2a75bb'
+button.style.color ="white"
+button.style.border="none"
+button.style.cursor="pointer"
+
+let grids = document.querySelectorAll('.grid')
+grids.forEach(grid => {
+    grid.style.display ="flex"
+    grid.style.flexWrap ="wrap"
+    grid.style.justifyContent ="center"
+    grid.style.gap="2rem"
+    grid.style.padding ="3rem"
+
 })
 
+let teamBuilder = document.querySelector('.team-builder')
+teamBuilder.style.backgroundColor ="white"
+teamBuilder.style.padding="4rem"
+teamBuilder.style.margin="4rem auto"
+teamBuilder.style.borderRadius ="2rem"
+teamBuilder.style.boxShadow='0 0.5rem 1rem rgba(0,0,0,0.2)'
+teamBuilder.style.maxWidth="50rem"
+})
+let saveButton = document.querySelector("#save-team")
+saveButton.style.marginTop ="2rem"
 
 
 
@@ -29,46 +60,5 @@ document.addEventListener('DOMContentLoaded',function(){
 
 
 
+// window.alert('BORA CODAR!')
 
-window.alert('BORA CODAR!')
-
-// const pokemonContainer = document.getElementById('pokemon-container')
-// const searchInput = document.getElementById ('search'); 
-
-// async function fetchPokemon(pokemon){
-//     try{ 
-
-//       // requisiçao da api   
-//         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemmon.toLowerCase()}`)
-//         if(!response.ok) throw new Error ('Pokémon não encontrado')
-
-//             const data = await response.json()
-//             displayPokemon(data)
-    
-//     }catch(error){
-//         pokemonContainer.innerHTML ='<p>Pokémon não encontrado. </p>'
-//         console.error(error)
-//     }
-// }
-
-// function displayPokemon(data){
-//     pokemonContainer.innerHTML = `<div class="pokemon-card">
-//     <h2>${data.name.toUpperCase()} (#${data.id})</h2>
-//     <img src="${data.sprites.front_default}" alt="${data.name}">
-//     <p> Tipo: ${data.types.map(t => t.type.name).join(", ")}</p>
-//     </div>`
-// }
-
-// function searchPokemon(){
-//     const pokemon =searchInput.value.trim()
-//     if(pokemon) {fetchPokemon(pokemon)
-// } else {
-//     pokemonContainer.innerHTML="<p>Digite um nome ou número de Pokémon</p>"
-// }
-
-// }
-
-// function goToDetails(id){
-//     window.location.href =`pokemon.html?id=${id}`
-// }
-// window.searchPokemon = searchPokemon;

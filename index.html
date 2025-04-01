@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <link
-    rel="icon"
-    href="https://cdn.pixabay.com/photo/2016/09/01/09/31/pokemon-1635610_960_720.png"
-  />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/src/style.css">
-    <title>pokemon</title>
-</head>
-<body>
-    <div id="app">
-      <h1>Pokédex</h1>
-    
-      <input type="text" id="search" placeholder="Digite o nome ou número do Pokémon">
-      <button onclick="searchPokemon()">Buscar</button>
-  
-      <div id="pokemon-container"></div>
-  
-    </div>
-    <script  src="src/main.js" defer></script>
-</body>
+      rel="icon"
+      href="https://cdn.pixabay.com/photo/2016/09/01/09/31/pokemon-1635610_960_720.png"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>POKÉDEX</title>
+  </head>
+  <body>
+    <header >
+      <h1>Pokédex - My poke Team</h1>
+    </header>
+    <main>
+      <section class="search-bar">
+        <input
+          type="text"
+          id="search"
+          placeholder="Enter Pokémon name or number"
+        />
+        <button onclick="searchPokemon()">Search</button>
+      </section>
+      <section class="pokemon-list">
+        <h2>Choose Your Pokemon</h2>
+        <div id="available-pokemon" class="grid"></div>
+      </section>
+      <section class="team-buider">
+        <h2>Your Team</h2>;
+        <div id="team" class="grid"></div>
+        <button id="save-team">Save Team</button>
+      </section>
+    </main>
+
+    <script src="src/main.js"></script>
+  </body>
 </html>

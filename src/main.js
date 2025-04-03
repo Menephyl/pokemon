@@ -1,79 +1,155 @@
+
 document.addEventListener("DOMContentLoaded", function () {
-  document.body.style.fontFamily = "Aria,sans-serif";
+  document.body.style.fontFamily = "Arial,sans-serif";
   document.body.style.backgroundColor = "#f4f4f4";
   document.body.style.textAlign = "center";
 
   let header = document.querySelector("header");
-  header.style.backgroundColor = "#ffcb05";
-  header.style.padding = "5rem";
-  header.style.fontSize = "2.5rem";
-  header.style.color = "#2a75bb";
+  Object.assign(header.style, {
+    backgroundColor: "#ffcb05",
+    padding: "5rem",
+    fontSize: "2.5rem",
+    color: "#2a75bb",
+  });
 
   let menu = document.getElementById("menu");
   menu.style.backgroundColor = "#fff";
 
-let links = document.querySelector('.links')
-links.style.backgroundColor="#fff"
-links.style.marginLeft="69rem"
-links.style.marginTop="1rem"
+  let links = document.querySelector(".links");
+  Object.assign(links.style, {
+    backgroundColor: "#fff",
+    display: "flex",
+    justifyContent: "center",
+    gap: "1rem",
+    marginTop: "1rem",
+  });
 
+  function styleMenuButton(button) {
+    Object.assign(button.style, {
+      color: "black",
+      textDecoration: "none",
+      padding: "0.5rem 1rem",
+      borderRadius: "0.5rem",
+      transition: "background-color 0.3s",
+    });
 
-let btnMenu = document.querySelector(".btn-menu")
-btnMenu.style.color="black"
-btnMenu.style.marginRight="1rem"
+    button.addEventListener("mouseenter", () => {
+      button.style.backgroundColor = "#ffcb05";
+    });
+    button.addEventListener("mouseleave", () => {
+      button.style.backgroundColor = "transparent";
+    });
+  }
 
-btnMenu.style.textDecoration="none"
-btnMenu.addEventListener('mouseenter',()=>{
-    btnMenu.classList.add('hover-effect')
-})
-btnMenu.addEventListener('mouseleave',()=>{
-    btnMenu.classList.remove('hover-effect')
-})
+  const myTeamsBtn = document.querySelector(".btn-menu");
+  const createTeamBtn = document.querySelector(".btn-menu2");
+  styleMenuButton(myTeamsBtn);
+  styleMenuButton(createTeamBtn);
 
-
-let btnMenu2 = document.querySelector('.btn-menu2')
-btnMenu2.style.color="black"
-btnMenu2.style.textDecoration="none"
-btnMenu2.addEventListener('mouseenter',()=>{
-    btnMenu2.classList.add('hover-effect')
-})
-btnMenu2.addEventListener('mouseleave',()=>{
-    btnMenu2.classList.remove('hover-effect')
-})
-
+  myTeamsBtn.style.fontWeight = "bold";
+  myTeamsBtn.style.textDecoration = "underline";
 
   let searchBar = document.getElementById("search-bar");
   searchBar.style.margin = "2rem";
-
+  
   let input = document.getElementById("search");
-  input.style.padding = "1rem";
-  input.style.width = "25rem";
+  Object.assign(input.style, {
+    padding: "1rem",
+    width: "25rem",
+    borderRadius: "0.5rem",
+  });
 
   let button = document.querySelector(".search-btn");
-  button.style.padding = "1rem 2rem";
-  button.style.backgroundColor = "#2a75bb";
-  button.style.color = "white";
-  button.style.border = "none";
-  button.style.cursor = "pointer";
+  Object.assign(button.style, {
+    padding: "1rem 2rem",
+    backgroundColor: "#2a75bb",
+    color: "white",
+    border: "none",
+    cursor: "pointer",
+  });
 
   let grids = document.querySelectorAll(".grid");
   grids.forEach((grid) => {
-    grid.style.display = "flex";
-    grid.style.flexWrap = "wrap";
-    grid.style.justifyContent = "center";
-    grid.style.gap = "2rem";
-    grid.style.padding = "3rem";
+    Object.assign(grid.style, {
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      gap: "2rem",
+      padding: "3rem",
+    });
   });
 
   let teamBuilder = document.querySelector(".team-builder");
-  teamBuilder.style.backgroundColor = "white";
-  teamBuilder.style.padding = "4rem";
-  teamBuilder.style.margin = "4rem auto";
-  teamBuilder.style.borderRadius = "2rem";
-  teamBuilder.style.boxShadow = "0 0.5rem 1rem rgba(0,0,0,0.2)";
-  teamBuilder.style.maxWidth = "50rem";
-});
-let saveButton = document.querySelector("#save-team");
-saveButton.style.marginTop = "2rem";
+  Object.assign(teamBuilder.style, {
+    backgroundColor: "white",
+    padding: "4rem",
+    margin: "4rem auto",
+    borderRadius: "2rem",
+    boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.2)",
+    maxWidth: "50rem",
+  });
 
-// window.alert('BORA CODAR!')
+  let saveButton = document.querySelector("#save-team");
+  saveButton.style.marginTop = "2rem";
+
+  let nav = document.getElementById("nav");
+  Object.assign(nav.style, {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "1rem",
+  });
+
+  Object.assign(links.style, {
+    display: "flex",
+    gap: "1rem",
+    marginLeft: "auto",
+  });
+
+  const chooseYourPokemon = document.querySelector(".pokemon-list h2");
+  const saveTeamSection = document.querySelector(".team-builder");
+
+  searchBar.style.display = "none";
+  chooseYourPokemon.style.display = "none";
+  saveTeamSection.style.display = "none";
+
+  const createTeamMainBtn = document.createElement("button");
+  createTeamMainBtn.textContent = "Create Team";
+  Object.assign(createTeamMainBtn.style, {
+    padding: "1rem 2rem",
+    backgroundColor: "#2a75bb",
+    color: "white",
+    border: "none",
+    borderRadius: "0.5rem",
+    cursor: "pointer",
+    fontSize: "1.2rem",
+    marginTop: "1.5rem",
+  });
+  document.body.insertBefore(createTeamMainBtn, document.querySelector("main"));
+
+  function toggleCreateTeam() {
+    const isHidden = searchBar.style.display === "none";
+    searchBar.style.display = isHidden ? "block" : "none";
+    saveTeamSection.style.display = isHidden ? "block" : "none";
+    chooseYourPokemon.style.display = isHidden ? "block" : "none";
+
+    if (isHidden) {
+      createTeamBtn.style.fontWeight = "bold";
+      createTeamBtn.style.textDecoration = "underline";
+      myTeamsBtn.style.fontWeight = "normal";
+      myTeamsBtn.style.textDecoration = "none";
+    } else {
+      createTeamBtn.style.fontWeight = "normal";
+      createTeamBtn.style.textDecoration = "none";
+      myTeamsBtn.style.fontWeight = "bold";
+      myTeamsBtn.style.textDecoration = "underline";
+    }
+  }
+
+  createTeamBtn.addEventListener("click", toggleCreateTeam);
+  createTeamMainBtn.addEventListener("click", toggleCreateTeam);
+});
+
+
+
+

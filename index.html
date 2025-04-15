@@ -8,7 +8,7 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/style.css" />
-    <title>POKÉDEX</title>
+    <title>POKÉDEX - My teams page</title>
   </head>
   <body>
     <header>
@@ -24,33 +24,14 @@
         />
         <p>Hello Brother!</p>
         <div class="links">
-          <a href="#" class="btn-menu" >My Teams</a>
-          <a href="#" class="btn-menu2">Create Team</a>
+          <a href="#" class="btn-menu">My Teams</a>
+          <a href="createTeams.html" class="btn-menu2">Create Team</a>
         </div>
 
       </nav>
     </div>
 
-    <main>
-      <section id="search-bar">
-        <input
-          type="text"
-          id="search"
-          placeholder="Enter Pokémon name or number"
-        />
-        <button class="search-btn">Search</button>
-      </section>
-      <section class="pokemon-list">
-        <h2>Choose Your Pokemon</h2>
-        <div id="available-pokemon" class="grid"></div>
-      </section>
-      <section class="team-builder">
-        <h2>Your Team</h2>
-        <div id="team" class="grid"></div>
-        <button id="save-team">Save Team</button>
-      </section>
-    </main>
-
+ 
     <script src="src/main.js"></script>
     <script src="src/fetch.js"></script>
   </body>

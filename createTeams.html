@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/style.css">
+    <title>Create Teams page </title>
+</head>
+<body>
+    <header>
+        <h1>Pokédex - My poke Team</h1>
+      </header>
+      <div id="menu">
+        <nav id="nav">
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/007/409/979/original/people-icon-design-avatar-icon-person-icons-people-icons-are-set-in-trendy-flat-style-user-icon-set-vector.jpg"
+            alt=" ico"
+            width="35px"
+            height="35px"
+          />
+          <p>Hello Brother!</p>
+          <div class="links">
+            <a href="index.html" class="btn-menu">My Teams</a>
+            <a href="#" class="btn-menu2">Create Team</a>
+          </div>
+  
+        </nav>
+      </div>
+
+
+
+    <main>
+        <section id="search-bar">
+          <input
+            type="text"
+            id="search"
+            placeholder="Enter Pokémon name or number"
+          />
+          <button class="search-btn">Search</button>
+        </section>
+        <section class="pokemon-list"> <!-- essa é a lista de pokemons para selecionar . será necessário colocá-la na area lateral,semelhante ao modelo -->
+          <h2>Choose Your Pokemon</h2>
+          <div id="available-pokemon" class="grid"></div>
+        </section>
+        <section class="team-builder">
+          <h2>Your Team</h2>
+          <div id="team" class="grid"></div>
+          <button id="save-team">Save Team</button>
+        </section>
+      </main>
+  
+</body>
+
+<script src="teams.js">
+
+</script>
+</html>

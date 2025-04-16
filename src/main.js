@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.body.style.fontFamily = "Arial,sans-serif";
+ document.body.style.fontFamily = "Russo One,sans-serif";
   document.body.style.backgroundColor = "#f4f4f4";
   document.body.style.textAlign = "center";
 
@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
     alignContent:"auto",
     gap: "1rem",
     marginTop: "1rem",
-    marginLeft:'auto'
+    marginLeft:'auto',
+    fontFamily:'RussoOne',
+
 
   });
 
@@ -73,7 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
     fontSize: "1.2rem",
     marginTop: "1.5rem",
   });
-  
+  createTeamMainBtn.addEventListener('click', function(event){
+    window.location.href =' createTeams.html'
+  })
   document.body.insertBefore(createTeamMainBtn, document.querySelector("main"));
 
  

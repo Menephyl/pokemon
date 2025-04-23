@@ -1,8 +1,21 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async()=> {
  document.body.style.fontFamily = "Russo One,sans-serif";
  document.body.style.backgroundColor = "#f4f4f4";
  document.body.style.textAlign = "center";
  
+
+const availableContainer = document.getElementById('available-pokemon')
+const pokemonList =["pikachu", "bulbasaur", "charizard", "squirtle"];
+
+for (let name of pokemonList) {
+    const pokemon = await fetchPokemonData(name);
+    if (pokemon) displayPokemon(pokemon, availableContainer);
+}
+
+
+
+
+ // header 
  let header = document.querySelector("header");
  Object.assign(header.style, {
    backgroundColor: "#ffcb05",
@@ -115,31 +128,69 @@ document.addEventListener("DOMContentLoaded", function () {
   let saveArea = document.querySelector('.save-area')
   Object.assign(saveArea.style,{
     display:'flex',
-    flexDireciton:'row',
+    flexDirection:'row',
     padding:'0.5rem',
     fontFamily:'Times new roman,sans serif',
-    backgroundColor:'light'
+    backgroundColor:'light',
+    justifyContent: "flex-end", // Isso alinha o botão à direita
+    padding: "1.5rem",
+    marginRight:'29rem',
+    gap: "20px",
+   
 
 
   })
+let hint = document.querySelector('.r')
+Object.assign(hint.style,{
+  position:'absolute',
+  marginRight:'20rem',
+  padding:'20px',
+  fontSize:'20px'
+})
 
   let text = document.querySelector('.text')
-  text.style.textAlign='left'
-  text.style.marginLeft='15%'
-  text.style.fontSize='20px'
+  Object.assign(text.style,{
+    textAlign:'left',
+  marginLeft:'15%',
+fontSize:'20px'
+  })
   // text.style.marginBottom='20px'
 
   let saveButton = document.querySelector("#save-team");
   Object.assign(saveButton.style,{
     display:'flex',
-   marginLeft:'17rem',
+  marginLeft:'auto',
    backgroundColor:'#2a75bb',
    color:'white',   
-   fontWeight:'light'
+   fontWeight:'light',
+    
    
   })
+
+  // botoes  de navegação 
+  const  buttonContainer = document.createElement('div')
+  Object.assign(buttonContainer.style,{
+    display:'flex',
+    justifyContent:'center',
+    gap:'10px',
+    marginBottom:'20px',
+  })
+
+  const previousButton = document.createElement('button')
+  previousButton.textContent ='Previous'
+  previousButton.id='previous'
+
+  const nextButton=document.createElement('button')
+  nextButton.textContent ='next'
+nextButton.id='next'
+
+buttonContainer.appendChild(previousButton)
+buttonContainer.appendChild(nextButton)
+document.querySelector('.save-area').after(buttonContainer)
+
  
- 
+ // paginação da lista 
+
  
 
   let grids = document.querySelectorAll(".grid"); // para  a lista de pokemons da api 
@@ -197,4 +248,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
   createTeamBtn.addEventListener("click", toggleCreateTeam);
 //   createTeamMainBtn.addEventListener("click", toggleCreateTeam);
+
+
+
+// API 
+
+
+async function fetchPokemonData(pokemonName) {
+  try{
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+    if(!response.ok) throw new Error('Erro ao buscar Pokémon.')
+      return await response.json()
+
+  }catch(error){
+    console.error(error)
+  }
+  
+}
+
+function displayPokemon(pokemon,container){
+  const card = document.createElement('div')
+  card.classList.add('pokemon-card')
+
+  card.innerHTML =`
+  <h2>${pokemon.name}</h2>
+  <img src='${pokemon.sprites.front_default}' alt=$'{pokemon.nome}'>
+  <p> Tipo: ${pokemon.types[0].type.name}</p>
+  `
+  container.appendChild(card)
+}
+
+
+
+
+
 })

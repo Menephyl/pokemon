@@ -49,6 +49,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  const teamStatutsTitle = document.querySelector('.team-status')
+
+  Object.assign(teamStatutsTitle.style,{
+    paddingTop:'40px',
+    fontWeight:'200',
+    
+    
+  })
+
+
+
   const myTeamsBtn = document.querySelector(".btn-menu");
   const createTeamBtn = document.querySelector(".btn-menu2");
   styleMenuButton(myTeamsBtn);

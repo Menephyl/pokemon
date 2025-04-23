@@ -1,30 +1,34 @@
-document.addEventListener("DOMContentLoaded", async()=> {
- document.body.style.fontFamily = "Russo One,sans-serif";
- document.body.style.backgroundColor = "#f4f4f4";
- document.body.style.textAlign = "center";
- 
+document.addEventListener("DOMContentLoaded", async () => {
+  document.body.style.fontFamily = "Russo One,sans-serif";
+  document.body.style.backgroundColor = "#f4f4f4";
+  document.body.style.textAlign = "center";
 
-const availableContainer = document.getElementById('available-pokemon')
-const pokemonList =["pikachu", "bulbasaur", "charizard", "squirtle"];
+  const availableContainer = document.getElementById("available-pokemon");
 
-for (let name of pokemonList) {
+  if (!availableContainer) {
+    console.warn("Erro: Elemento #available-pokemon não encontrado!");
+    return;
+  }
+  createTeamNavigationButtons();
+
+
+  const pokemonList = ["pikachu", "bulbasaur", "charizard", "squirtle"];
+
+  for (let name of pokemonList) {
     const pokemon = await fetchPokemonData(name);
     if (pokemon) displayPokemon(pokemon, availableContainer);
-}
+  }
 
+  // header
+  let header = document.querySelector("header");
+  Object.assign(header.style, {
+    backgroundColor: "#ffcb05",
+    padding: "5rem",
+    fontSize: "2.5rem",
+    color: "#2a75bb",
+  });
 
-
-
- // header 
- let header = document.querySelector("header");
- Object.assign(header.style, {
-   backgroundColor: "#ffcb05",
-   padding: "5rem",
-   fontSize: "2.5rem",
-   color: "#2a75bb",
- });
-
- let menu = document.getElementById("menu");
+  let menu = document.getElementById("menu");
   menu.style.backgroundColor = "#fff";
 
   let links = document.querySelector(".links");
@@ -53,7 +57,6 @@ for (let name of pokemonList) {
     });
   }
 
-
   let nav = document.getElementById("nav");
   Object.assign(nav.style, {
     display: "flex",
@@ -78,123 +81,77 @@ for (let name of pokemonList) {
 
   let searchBar = document.getElementById("search-bar");
   searchBar.style.marginTop = "4.5rem";
-  searchBar.style.paddingBottom='1.4rem';
-   searchBar.style.borderBottom= '1px  solid #A9A9A9'
-   
-  
+  searchBar.style.paddingBottom = "1.4rem";
+  searchBar.style.borderBottom = "1px  solid #A9A9A9";
 
+  const intro = document.createElement("h4");
+  searchBar.appendChild(intro);
+  intro.innerText = "What will be the name of your pokemon team?";
+  Object.assign(intro.style, {
+    display: "flex",
+    position: "absolute",
+    top: "25rem",
+    left: "38%",
+    marginBottom: "0.5rem",
+    fontFamily: "Times New Roman,sans-serif",
+    fontSize: "24px",
+    fontWeight: "400",
+  });
 
+  let nameTeamInput = document.querySelector("#name-team"); // caixa para colcar o nome do time
 
-  const intro  = document.createElement('h4')
-  searchBar.appendChild(intro)
-  intro.innerText='What will be the name of your pokemon team?'
-  Object.assign(intro.style,{
-    display:'flex',
-    position:'absolute',
-    top:'25rem',
-    left:'38%',
-    marginBottom:'0.5rem',
-    fontFamily:'Times New Roman,sans-serif',
-    fontSize:'24px',
-    fontWeight:'400',
-    
+  Object.assign(nameTeamInput.style, {
+    display: "flex",
+    position: "relative",
+    marginTop: "1.5rem",
+    left: "43%",
+    textAlign: "justify",
+    height: "30px",
+    borderRadius: "1px",
+    textDecoration: "none",
+  });
 
-  })
-  
-  let nameTeamInput = document.querySelector('#name-team')
-  Object.assign(nameTeamInput.style,{
-    display:'flex',
-    position:'relative',
-    marginTop:'1.5rem',
-    left:'43%',
-    textAlign:'justify',
-    height:'30px',
-    borderRadius:'1px',
-    textDecoration:'none',
-   
-  
-  })
-  
-  // nameTeamInput.style.marginBottom='5rem'
-  // let input = document.getElementById("search");
-  // Object.assign(input.style, {
-  //   marginTop:'12rem',
-  //   padding: "1rem",
-  //   width: "25rem",
-  //   borderRadius: "0.5rem",
-  //    display:"none"
-  // });
-
-  let saveArea = document.querySelector('.save-area')
-  Object.assign(saveArea.style,{
-    display:'flex',
-    flexDirection:'row',
-    padding:'0.5rem',
-    fontFamily:'Times new roman,sans serif',
-    backgroundColor:'light',
+  let saveArea = document.querySelector(".save-area"); // area para salvar o time criado
+  Object.assign(saveArea.style, {
+    display: "flex",
+    flexDirection: "row",
+    padding: "0.5rem",
+    fontFamily: "Times new roman,sans serif",
+    backgroundColor: "light",
     justifyContent: "flex-end", // Isso alinha o botão à direita
     padding: "1.5rem",
-    marginRight:'29rem',
+    marginRight: "29rem",
     gap: "20px",
-   
+  });
+  let hint = document.querySelector(".r");
+  Object.assign(hint.style, {
+    position: "absolute",
+    marginRight: "20rem",
+    padding: "20px",
+    fontSize: "20px",
+  });
 
-
-  })
-let hint = document.querySelector('.r')
-Object.assign(hint.style,{
-  position:'absolute',
-  marginRight:'20rem',
-  padding:'20px',
-  fontSize:'20px'
-})
-
-  let text = document.querySelector('.text')
-  Object.assign(text.style,{
-    textAlign:'left',
-  marginLeft:'15%',
-fontSize:'20px'
-  })
+  let text = document.querySelector(".text");
+  Object.assign(text.style, {
+    textAlign: "left",
+    marginLeft: "15%",
+    fontSize: "20px",
+  });
   // text.style.marginBottom='20px'
 
-  let saveButton = document.querySelector("#save-team");
-  Object.assign(saveButton.style,{
-    display:'flex',
-  marginLeft:'auto',
-   backgroundColor:'#2a75bb',
-   color:'white',   
-   fontWeight:'light',
-    
-   
-  })
+  let saveButton = document.querySelector("#save-team"); // botao para salvar o time 
+  Object.assign(saveButton.style, {
+    display: "flex",
+    marginLeft: "auto",
+    backgroundColor: "#2a75bb",
+    color: "white",
+    fontWeight: "light",
+  });
 
-  // botoes  de navegação 
-  const  buttonContainer = document.createElement('div')
-  Object.assign(buttonContainer.style,{
-    display:'flex',
-    justifyContent:'center',
-    gap:'10px',
-    marginBottom:'20px',
-  })
+  // paginação da lista
 
-  const previousButton = document.createElement('button')
-  previousButton.textContent ='Previous'
-  previousButton.id='previous'
-
-  const nextButton=document.createElement('button')
-  nextButton.textContent ='next'
-nextButton.id='next'
-
-buttonContainer.appendChild(previousButton)
-buttonContainer.appendChild(nextButton)
-document.querySelector('.save-area').after(buttonContainer)
-
- 
- // paginação da lista 
-
- 
-
-  let grids = document.querySelectorAll(".grid"); // para  a lista de pokemons da api 
-  grids.forEach((grid) => { 
+  let grids = document.querySelectorAll(".grid"); // para  a lista de pokemons da api
+  grids.forEach((grid) => {
     Object.assign(grid.style, {
       display: "flex",
       flexWrap: "wrap",
@@ -212,74 +169,76 @@ document.querySelector('.save-area').after(buttonContainer)
     borderRadius: "2rem",
     boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.2)",
     maxWidth: "50%",
-    height:'auto',
-    display:'flex',
-  
+    height: "auto",
+    display: "flex",
   });
-
- 
-  
 
   const chooseYourPokemon = document.querySelector(".pokemon-list h2");
   const saveTeamSection = document.querySelector(".team-builder");
 
-  chooseYourPokemon.style.display='none'
-  saveTeamSection.style.display='none'
+  chooseYourPokemon.style.display = "none";
+  saveTeamSection.style.display = "none";
 
+  function createTeamNavigationButtons(){
+    if(!document.getElementById('previous')){
+      const buttonContainer = document.createElement('div')
+      Object.assign(buttonContainer.style,{
+        display:'flex',
+        justifyContent:'center',
+        gap:'10px',
+        marginBottom:'20px'
+      })
+      const previousButton = document.createElement('button')
+      previousButton.textContent='Previous'
+      previousButton.id='previous'
+      Object.assign(previousButton.style,{
+        padding:'10px 20px',
+        backgroundColor:'#ffcb95',
+        border:'none',
+        cursor: "pointer",
+        fontSize: "16px", 
+      })
+      const nextButton = document.createElement("button");
+      nextButton.textContent = "Next";
+      nextButton.id = "next";
+      Object.assign(nextButton.style, {
+          padding: "10px 20px",
+          backgroundColor: "#2a75bb",
+          color: "White",
+          border: "none",
+          cursor: "pointer",
+          fontSize: "15px",
+      });
 
-  function toggleCreateTeam() {
-    const isHidden = searchBar.style.display === "none";
-    searchBar.style.display = isHidden ? "block" : "none";
-    saveTeamSection.style.display = isHidden ? "block" : "none";
-    chooseYourPokemon.style.display = isHidden ? "block" : "none";
+      buttonContainer.appendChild(previousButton);
+      buttonContainer.appendChild(nextButton);
 
-    if (isHidden) {
-      createTeamBtn.style.fontWeight = "bold";
-      createTeamBtn.style.textDecoration = "underline";
-      myTeamsBtn.style.fontWeight = "normal";
-      myTeamsBtn.style.textDecoration = "none";
-    } else {
-      createTeamBtn.style.fontWeight = "normal";
-      createTeamBtn.style.textDecoration = "none";
-      myTeamsBtn.style.fontWeight = "bold";
-      myTeamsBtn.style.textDecoration = "underline";
+      document.querySelector(".save-area").after(buttonContainer);
+    }
+  }
+  // API
+
+  async function fetchPokemonData(pokemonName) {
+    try {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+      );
+      if (!response.ok) throw new Error("Erro ao buscar Pokémon.");
+      return await response.json();
+    } catch (error) {
+      console.error(error);
     }
   }
 
-  createTeamBtn.addEventListener("click", toggleCreateTeam);
-//   createTeamMainBtn.addEventListener("click", toggleCreateTeam);
+  function displayPokemon(pokemon, container) {
+    const card = document.createElement("div");
+    card.classList.add("pokemon-card");
 
-
-
-// API 
-
-
-async function fetchPokemonData(pokemonName) {
-  try{
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-    if(!response.ok) throw new Error('Erro ao buscar Pokémon.')
-      return await response.json()
-
-  }catch(error){
-    console.error(error)
-  }
-  
-}
-
-function displayPokemon(pokemon,container){
-  const card = document.createElement('div')
-  card.classList.add('pokemon-card')
-
-  card.innerHTML =`
+    card.innerHTML = `
   <h2>${pokemon.name}</h2>
-  <img src='${pokemon.sprites.front_default}' alt=$'{pokemon.nome}'>
-  <p> Tipo: ${pokemon.types[0].type.name}</p>
-  `
-  container.appendChild(card)
-}
-
-
-
-
-
-})
+  <img src='${pokemon.sprites.front_default}' alt=$'{pokemon.name}'>
+  <p> Tipo: ${pokemon.types.map((t) => t.type.name).join(", ")}</p>
+  `;
+    container.appendChild(card);
+  }
+});

@@ -126,3 +126,133 @@ link to go back
 a:hover{
     text-decoration: underline;
 } */
+
+
+
+/*  Estilos para cada tipo de Pokémon */
+.card--fire { background: linear-gradient(0deg, rgba(199,24,0,1) 10%, rgba(252,194,69,1) 100%); }
+.card--water { background: linear-gradient(120deg, #1CB5E0 0%, #000851 100%); }
+.card--grass { background: linear-gradient(140deg, rgba(196,218,61,1) 0%, rgba(110,127,14,1) 69%, rgba(39,80,9,1) 100%); }
+.card--electric { background: linear-gradient(90deg, rgba(255,222,0,1) 34%, rgba(232,255,153,1) 83%); }
+.card--bug { background: linear-gradient(50deg, #A8B820, #6D7815); }
+.card--normal { background: linear-gradient(110deg, #FDBB2D 0%, #3A1C71 100%); }
+.card--psychic { background: linear-gradient(140deg, rgba(255,167,249,1) 0%, rgba(255,44,195,1) 39%, rgba(255,227,167,1) 100%); }
+.card--ice { background: linear-gradient(230deg, rgba(202,234,246,1) 0%, rgba(160,234,241,1) 46%, rgba(111,184,235,1) 100%); }
+
+
+.pokemon-card {
+    width: 180px;
+    height: auto;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.pokemon-card img{
+    width: 90px;
+    height: 90px;
+}
+.pokemon-card:hover{
+    transform: scale(1.05);
+}
+
+/* Adicionar classe do tipo de Pokémon */
+.pokemon-card h3 {
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+
+#pokemon-list {
+    position: fixed;
+    left: 20px;
+    top: 400px;
+    width: 220px;
+    height: 80vh;
+    overflow-y: auto;
+    background-color: transparent;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#available-pokemon {
+    margin-left: 220px; /* 🔹 Garante que fique ao lado da lista lateral */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#previous, #next {
+    width: 80%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#previous {
+    background-color: red;
+    color: white;
+}
+
+#next {
+    background-color: #2a75bb;
+    color: white;
+}
+
+#previous:hover {
+    background-color: darkred;
+}
+
+#next:hover {
+    background-color: #1a5aa0;
+}
+#pokemon-pagination {
+    list-style: none;
+    padding: 0;
+}
+
+#pokemon-pagination li {
+    cursor: pointer;
+    padding: 8px;
+    margin: 5px 0;
+    background-color: #ffcc00;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#pokemon-pagination li:hover {
+    background-color: #e6b800;
+}
+
+#pokemon-pagination {
+    list-style: none;
+    padding: 0;
+}
+
+#pokemon-pagination li {
+    cursor: pointer;
+    padding: 8px;
+    margin: 5px 0;
+    background-color: #ffcc00;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#pokemon-pagination li:hover {
+    background-color: #e6b800;
+}

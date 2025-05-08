@@ -203,34 +203,46 @@ document.addEventListener("DOMContentLoaded", async () => {
         display:'flex',
         justifyContent:'center',
         gap:'10px',
-        marginBottom:'20px'
+        marginBottom:'20px',
+        display:'flex',
+        flexDirection:'row',
+        position:'relative',
+        marginRight:'98rem'
       })
       const previousButton = document.createElement('button')
-      previousButton.textContent='Previous'
+      previousButton.textContent='<< Previous'
       previousButton.id='previous'
       Object.assign(previousButton.style,{
         padding:'10px 20px',
         backgroundColor:'red',
         border:'none',
         cursor: "pointer",
-        fontSize: "16px", 
+        fontSize: "13px", 
         color:'white',
+        maxWidth:'100px',
+        height:'50px',
+        padding:'10px',
+        marginTop:'10px'
       })
       const nextButton = document.createElement("button");
-      nextButton.textContent = "Next";
-      nextButton.id = "next";
+      nextButton.textContent = "Next >>";
+      nextButton.id = "Next";
       Object.assign(nextButton.style, {
           padding: "10px 20px",
           backgroundColor: "#2a75bb",
           color: "White",
           border: "none",
           cursor: "pointer",
-          fontSize: "15px",
+          fontSize: "13px",
+          width:'100px',
+          height:'50px',
+          marginTop:'10px'
       });
 
       buttonContainer.appendChild(previousButton);
       buttonContainer.appendChild(nextButton);
-
+      // availableContainer.insertBefore(previousButton, availableContainer.firstChild);
+      // availableContainer.appendChild(nextButton);
       document.querySelector(".save-area").after(buttonContainer);
     }
   }
@@ -266,6 +278,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const name = document.createElement("h2");
     name.classList.add("card__name");
     name.textContent = pokemon.name;
+    
   
     const type = document.createElement("h3");
     type.classList.add("card__type");
@@ -274,19 +287,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Botão para editar nome
     const editButton = document.createElement("button");
     editButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
-    editButton.textContent = "Put name";
+    editButton.textContent = "Add";
     editButton.addEventListener("click", () => {
-        const newName = prompt("Digite um novo nome para " + pokemon.name);
-        if (newName) name.textContent = newName;
+        // const newName = prompt("Digite um novo nome para " + pokemon.name);
+        // if (newName) name.textContent = newName;
     });
   
     //  Botão para remover Pokémon do time
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("btn-sm", "btn-danger");
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", () => {
-        card.remove();
+    deleteButton.textContent = "Detalhes";
+    Object.assign(deleteButton.style, {
+        marginLeft: "10px",
+        fontWeight: "light",
+        paddingTop: "15px",
     });
+    // deleteButton.addEventListener("click", () => {
+    //     card.remove();
+    // });
   
     caption.appendChild(editButton);
     caption.appendChild(name);

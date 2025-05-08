@@ -47,6 +47,7 @@ input{
     border-radius: 5px;
     font-size: 16px;
     margin-right: 10px;
+    padding: 10px;
 }
 
 button{
@@ -56,6 +57,9 @@ button{
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    /* color: rgb(255, 255, 255); */
+    font-weight: bold;
+    padding: 10px;
 }
 
 button:hover{
@@ -111,21 +115,6 @@ button:hover{
     transform: scale(1.1);
     transition: transform o.3s ease-in-out;
 }
-/*
-link to go back
-
-*/
-
-/* a{
-    display: inline-block;
-    margin: 20px;
-    text-decoration: none;
-    color: #ffcc00;
-    font-weight: bold;
-}
-a:hover{
-    text-decoration: underline;
-} */
 
 
 
@@ -170,8 +159,7 @@ a:hover{
 }
 
 #pokemon-list {
-    position: fixed;
-    left: 20px;
+    position: relative;
     top: 400px;
     width: 220px;
     height: 80vh;
@@ -182,15 +170,20 @@ a:hover{
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
 }
 
 #available-pokemon {
-    margin-left: 220px; /* 🔹 Garante que fique ao lado da lista lateral */
+    margin-left: 50px; /*  Garante que fique ao lado da lista lateral */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-right: 300px;
+   
+};
 
 #previous, #next {
     width: 80%;

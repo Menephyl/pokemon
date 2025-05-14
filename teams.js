@@ -126,6 +126,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     height: "30px",
     borderRadius: "1px",
     textDecoration: "none",
+    gap: "1rem",
+    padding: "0.5rem",
   });
 
   let saveArea = document.querySelector(".save-area"); // area para salvar o time criado
@@ -146,6 +148,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     marginRight: "20rem",
     padding: "20px",
     fontSize: "20px",
+
   });
 
   let text = document.querySelector(".text");
@@ -153,16 +156,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     textAlign: "left",
     marginLeft: "15%",
     fontSize: "20px",
+
   });
   // text.style.marginBottom='20px'
 
-  let saveButton = document.querySelector("#save-team"); // botao para salvar o time 
+  let saveButton = document.querySelector("#save-team"); // botao para salvar o time
   Object.assign(saveButton.style, {
     display: "flex",
     marginLeft: "auto",
     backgroundColor: "#2a75bb",
     color: "white",
     fontWeight: "light",
+
   });
 
   // paginação da lista
@@ -178,17 +183,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  let teamBuilder = document.querySelector(".team-builder");
-  Object.assign(teamBuilder.style, {
-    backgroundColor: "white",
-    padding: "4rem",
-    margin: "4rem auto",
-    borderRadius: "2rem",
-    boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.2)",
-    maxWidth: "50%",
-    height: "auto",
-    display: "flex",
-  });
+
 
   const chooseYourPokemon = document.querySelector(".pokemon-list h2");
   const saveTeamSection = document.querySelector(".team-builder");
@@ -201,13 +196,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       const buttonContainer = document.createElement('div')
       Object.assign(buttonContainer.style,{
         display:'flex',
-        justifyContent:'center',
+        justifyContent:'flex-start',
         gap:'10px',
         marginBottom:'20px',
-        display:'flex',
         flexDirection:'row',
         position:'relative',
-        marginRight:'98rem'
+        marginLeft:'40px',
       })
       const previousButton = document.createElement('button')
       previousButton.textContent='<< Previous'
@@ -217,7 +211,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         backgroundColor:'red',
         border:'none',
         cursor: "pointer",
-        fontSize: "13px", 
+        fontSize: "13px",
         color:'white',
         maxWidth:'100px',
         height:'50px',
@@ -226,7 +220,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       })
       const nextButton = document.createElement("button");
       nextButton.textContent = "Next >>";
-      nextButton.id = "Next";
+      nextButton.id = "next";
       Object.assign(nextButton.style, {
           padding: "10px 20px",
           backgroundColor: "#2a75bb",
@@ -241,8 +235,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       buttonContainer.appendChild(previousButton);
       buttonContainer.appendChild(nextButton);
-      // availableContainer.insertBefore(previousButton, availableContainer.firstChild);
-      // availableContainer.appendChild(nextButton);
+
       document.querySelector(".save-area").after(buttonContainer);
     }
   }
@@ -261,135 +254,111 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function displayPokemon(pokemon, container) {
+
     const card = document.createElement("figure");
+
+
+
+    if (container.id === "available-pokemon") {
+      card.classList.add("pokemon-card"); // 🔹 Mantém apenas o estilo básico
+  } else {
+      card.classList.add("pokemon-card", `card--${pokemon.types[0].type.name}`); // 🔹 Aplica cor baseada no tipo só no time
+  }
+
     card.classList.add("pokemon-card", `card--${pokemon.types[0].type.name}`);
-  
+
     const imageContainer = document.createElement("div");
     imageContainer.classList.add("card__image-container");
-  
+
     const img = document.createElement("img");
     img.src = pokemon.sprites.front_default;
     img.alt = pokemon.name;
     imageContainer.appendChild(img);
-  
+
     const caption = document.createElement("figcaption");
     caption.classList.add("card__caption");
-  
+
     const name = document.createElement("h2");
     name.classList.add("card__name");
     name.textContent = pokemon.name;
-    
-  
+
+
     const type = document.createElement("h3");
     type.classList.add("card__type");
     type.textContent = pokemon.types.map((t) => t.type.name).join(", ");
-  
+
     // Botão para editar nome
-    const editButton = document.createElement("button");
-    editButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
-    editButton.textContent = "Add";
-    editButton.addEventListener("click", () => {
-        // const newName = prompt("Digite um novo nome para " + pokemon.name);
-        // if (newName) name.textContent = newName;
+    const addButton = document.createElement("button");
+    addButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
+    addButton.textContent = "Add Pokémon";
+    addButton.addEventListener("click", () => {
+
+      alert(`OK`)
+
     });
-  
+
     //  Botão para remover Pokémon do time
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("btn-sm", "btn-danger");
-    deleteButton.textContent = "Detalhes";
-    Object.assign(deleteButton.style, {
+    const detailsButton = document.createElement("button");
+    detailsButton.classList.add("btn-sm", "btn-danger");
+    detailsButton.textContent = "Detalhes";
+    Object.assign(detailsButton.style, {
         marginLeft: "10px",
         fontWeight: "light",
         paddingTop: "15px",
     });
+
+    detailsButton.addEventListener("click", () => {
+
+      alert(`
+          ${pokemon.sprites.other['official-artwork'].front_default}'alt='${pokemon.name} \n ' // imagem do pokemon, objetvo : inserir a imagem do pokemon
+        Details for ${pokemon.name}:\n
+        Type: ${pokemon.types.map(t => t.type.name).join(", ")}\n
+        Height: ${pokemon.height/10} cm \n
+        Weight: ${pokemon.weight/10} kg\n
+        Abilities: ${pokemon.abilities.map(a => a.ability.name).join(", ")}`);
+
+      alert( `   // objetivo depois é criar uma div acima ou mover esse div para acima do item ( uma ideia boa pode ser o z-index para colocar a div acima do item)
+        <div class ='pokemon-details -card'>
+              <h1>
+                  ${data.name.toUpperCase()}(#${data.id})
+              </h1>
+          <img src=${data.sprites.other['official-artwork'].front_default}'alt='${data.name}'>
+          <p><strong>Altura:</strong>${data.height/10} m</p>
+          <p><strong>Peso:</strong>${data.weight/10} kg</p>
+          <p><strong>Tipo:</strong>${data.types.map(t=>t.type.name).join(",")}</p>
+          <p><strong>Habilidades:</strong>${data.abilities.map(a=>a.ability.name).join(', ')}</p>
+          </div>`);
+
+  });
+
+
+    caption.appendChild(addButton);
+    caption.appendChild(name);
+    caption.appendChild(type);
+
+    card.appendChild(imageContainer);
+    card.appendChild(caption);
+
+    caption.appendChild(detailsButton);
+
+    container.appendChild(card);
+  }
+
+  // time do usuario - teamBuilder
+
     // deleteButton.addEventListener("click", () => {
     //     card.remove();
     // });
-  
-    caption.appendChild(editButton);
-    caption.appendChild(name);
-    caption.appendChild(type);
-    caption.appendChild(deleteButton);
-    card.appendChild(imageContainer);
-    card.appendChild(caption);
-  
-    container.appendChild(card);
-  }
-  
-  
+    // caption.appendChild(addButton);
+    // caption.appendChild(deleteButton);
 
-  function displayPokemonInList(pokemon, container) {
-    const card = document.createElement("div");
-    card.classList.add("pokemon-selection-card"); 
 
-    const imageContainer = document.createElement("div");
-    imageContainer.classList.add("card__image-container");
+    // const newName = prompt("Digite um novo nome para " + pokemon.name);
+        // if (newName) name.textContent = newNamejm;
 
-    const img = document.createElement("img");
-    img.src = pokemon.sprites.front_default;
-    img.alt = pokemon.name;
-    imageContainer.appendChild(img);
-
-    const caption = document.createElement("figcaption");
-    caption.classList.add("card__caption");
-
-    const name = document.createElement("h2");
-    name.classList.add("card__name");
-    name.textContent = pokemon.name;
-
-    //  Botão "Add Pokemon"
-    const addButton = document.createElement("button");
-    addButton.classList.add("btn-sm", "btn-primary");
-    addButton.textContent = "Add Pokemon";
-    addButton.addEventListener("click", () => {
-        displayPokemon(pokemon, document.getElementById("available-pokemon"));
-    });
-
-    //  Botão "Details"
-    const detailsButton = document.createElement("button");
-    detailsButton.classList.add("btn-sm", "btn-info");
-    detailsButton.textContent = "Details";
-    detailsButton.addEventListener("click", () => {
-        alert(`Details for ${pokemon.name}:\nType: ${pokemon.types.map(t => t.type.name).join(", ")}\nHeight: ${pokemon.height}\nWeight: ${pokemon.weight}`);
-    });
-
-    caption.appendChild(name);
-    caption.appendChild(addButton);
-    caption.appendChild(detailsButton);
-    card.appendChild(imageContainer);
-    card.appendChild(caption);
-
-    container.appendChild(card);
-}
- async function updatePokemonList(startIndex,limit){
-  const paginationContainer = document.getElementById('pokemon-pagination')
-  paginationContainer.innerHTML=""
-  const pokemonList = [
-    
-  ];
-  for (let i = startIndex; i < Math.min(startIndex + limit, pokemonList.length); i++) {
-    const pokemon = await fetchPokemonData(pokemonList[i]);
-    if (pokemon) displayPokemonInList(pokemon, paginationContainer);
- }
-}
-let currentIndex = 0 
-const limit = 5 
-document.getElementById('previous').addEventListener('click',()=>{
-  if (currentIndex > 0) {
-    currentIndex -= limit;
-    updatePokemonList(currentIndex, limit);
-}
-})
-document.getElementById("next").addEventListener("click", () => {
-  if (currentIndex + limit < 100) {
-      currentIndex += limit;
-      updatePokemonList(currentIndex, limit);
-  }
-
-});
 
 
 
 
 
-}); 
+});

@@ -137,31 +137,45 @@ button:hover{
 .pokemon-card {
     background-color: rgba(211, 211, 211, 0.842) !important; 
     color: black;
-    border: 2px solid #d3d3d3; 
-    padding: 10px;
+    border: 2px solid #000000; 
+    padding: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 8px;
     width: 180px;
-    margin-bottom: 10px;
+    height: 270px;
+    
+
 }
 
 .pokemon-card img{
-    width: 90px;
-    height: 90px;
+    margin-bottom: 0;
+    padding: 0;
+    
 }
 .pokemon-card:hover{
     transform: scale(1.05);
 }
-
+.pokemon-container button{
+    height: 50px;
+    width: auto;
+    padding-bottom: 10px;
+    margin-top: -5px;
+}
+.pokemon-card h2{
+    font-size: 17px;
+    padding: 0;
+}
 /* Adicionar classe do tipo de Pokémon */
-.pokemon-card h3 {
-    padding: 5px;
+.pokemon-card h4 {
+    margin-top: -5px;
     border-radius: 5px;
     font-weight: bold;
-    color: rgb(0, 0, 0);
+    color: rgba(99, 99, 99, 0.781);
     text-transform: uppercase;
+    font-size: 12px;
+    padding: 10px;
 }
 
 #pokemon-list {
@@ -172,14 +186,13 @@ button:hover{
     overflow-y: auto;
     background-color: transparent;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 10px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start; 
 }
 #available-pokemon {
-    margin-left: 50px;
+    margin-left: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -227,12 +240,24 @@ button:hover{
 }
 
 .team-container {
-    position: absolute; /* 🔹 Garantimos que fique fixo ao lado */
-    top: 20px; /* 🔹 Ajuste fino para alinhar ao início da lista */
-    right: 20px; /* 🔹 Alinhado ao lado da paginação */
-    width: 300px; /* 🔹 Define um tamanho adequado */
+    position: absolute; 
+    top: 40rem;
+    right: 2%;    
+    width: 80%;
+    height: 100vh;
+     background-color: white;
+    border: 2px solid black;
+    padding: 15px;
+    border-radius: 10px;
+}
+.team-builder {
+    position: absolute;
+    top: 120px; 
+    left: 30px; 
+    width: 320px; 
     background-color: white;
     border: 2px solid black;
     padding: 15px;
     border-radius: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }

@@ -239,17 +239,24 @@ button:hover{
     background-color: #e6b800;
 }
 
-.team-container {
-    position: absolute; 
-    top: 40rem;
-    right: 2%;    
-    width: 80%;
-    height: 100vh;
-     background-color: white;
-    border: 2px solid black;
-    padding: 15px;
-    border-radius: 10px;
+
+    .team-container {
+        position: absolute; 
+        left: 30%;   
+        top: 40rem;
+        width: 55em;        /* largura fixa ideal para não sobrepor */
+        height: 50%;        /* ou defina uma altura fixa, ex: 400px */
+        max-width: 90%;      /* responsivo em telas menores */
+        margin: 1rem;        /* espaço externo reduzido */
+        padding: 0.5rem;     /* acolchoamento interno leve */
+        box-sizing: border-box; /* inclui padding dentro da largura */
+        overflow-y: hidden;    /* scroll vertical caso o conteúdo extrapole */
+        overflow-x: hidden ;
+        background-color: white;
+        padding: 15px;
+         border: 2px solid black;
 }
+
 .team-builder {
     position: absolute;
     top: 120px; 

@@ -1,0 +1,18 @@
+9c1efe5 | 2025-05-30 | avanço para paginação
+f8ed669 | 2025-05-30 | unforgiven
+8b325e1 | 2025-05-14 | work on team area
+9a197f7 | 2025-05-07 | work on position items
+6246177 | 2025-05-06 | progresso
+ebcc6e1 | 2025-04-23 | Create settings.json
+c70dbc2 | 2025-04-23 | insert buttons
+156f50a | 2025-04-22 | teams adaptation
+d4f17a3 | 2025-04-16 | PROGRESS
+5049ec7 | 2025-04-15 | team area created
+92c836f | 2025-04-02 | create taams configurada
+8dc822e | 2025-04-01 | header nav section
+8b33d4a | 2025-04-01 | styles and async
+eb007c7 | 2025-04-01 | js makin styles
+4655474 | 2025-03-30 | progress js and css search
+aea0500 | 2025-03-29 | project structure
+17dbd73 | 2025-03-29 | commit
+bd8d825 | 2025-03-28 | Initial commit

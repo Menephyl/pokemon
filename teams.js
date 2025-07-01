@@ -13,10 +13,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const buttonContainer = document.createElement("div");
     Object.assign(buttonContainer.style, {
+      position:"relative",
       display: "flex",
+      top:"40px",
       justifyContent: "flex-start",
       gap: "10px",
-      marginBottom: "10px",
+      marginBottom: "30px",
       marginLeft: "40px",
     });
 
@@ -38,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     nextButton.textContent = "Next >>";
     Object.assign(nextButton.style, {
       backgroundColor: "#2a75bb",
-      border: "none",
+      border: "none"   ,
       cursor: "pointer",
       color: "white",
       fontSize: "13px",

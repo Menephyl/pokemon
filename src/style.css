@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     background-color: #e5e5e5;
-    font-family: Arial,sans-serif;
+    font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f5f5f5;
     padding: 20px;
 }
 
-#nav{
+#nav {
     width: 100%;
     height: 5rem;
     display: flex;
@@ -26,21 +26,22 @@ body{
     align-items: center;
 
 }
-#nav img{
+
+#nav img {
     margin-top: 1rem;
 }
 
-#nav  p{
+#nav p {
     display: flex;
     padding: 5px;
     margin-top: 1rem;
-    font: 700 34px  italic;
-   
+    font: 700 34px italic;
+
 }
 
 
 
-input{
+input {
     padding: 10px;
     width: 250px;
     border: 2px solid #ffcc00;
@@ -50,7 +51,7 @@ input{
     padding: 10px;
 }
 
-button{
+button {
     padding: 10px 15px;
     background-color: #ffcc00;
     border: none;
@@ -62,60 +63,111 @@ button{
     padding: 10px;
 }
 
-button:hover{
+button:hover {
     background-color: #e6b800;
 }
 
 /* pokemon cards */
 
 
-#pokemon-container{
-    margin-top:20px;
+#pokemon-container {
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-.pokemon-card{
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+
+/* Card simples e compacto */
+.pokemon-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    /* borda clara */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 12px 16px;
+    margin: 12px;
     text-align: center;
-    cursor: pointer;
+    width: 180px;
+    /* largura fixa */
+    box-sizing: border-box;
     transition: transform 0.2s ease-in-out;
 }
 
-.pokemon-card:hover{
-    transform:scale(1.05)
+
+.pokemon-card:hover {
+    transform: scale(1.03);
 }
-.pokemon-card img{
-    width: 120px;
-    height: 120px;
+
+.pokemon-card img {
+    width: 80px;
+    /* reduzido de 120px */
+    height: 80px;
+
 }
+
+/* Títulos e tipos com fonte menor */
+.pokemon-card h2 {
+    font-size: 1rem;
+    /* reduzido */
+    margin: 6px 0 4px;
+}
+
+
+/* Nome do Pokémon */
+.pokemon-card .card__name {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin: 8px 0;
+}
+
+
+/* Botões ficam mais compactos */
+.pokemon-card .btn {
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+}
+
+.pokemon-card .btn-outline-secondary {
+    background-color: #e6bf12;
+    /* azul principal */
+    color: #fff;
+}
+
+.pokemon-card .btn-danger {
+    background-color: #e6bf12;
+    /* tom ciano */
+    color: #fff;
+    margin-left: 8px;
+}
+
 
 /* Estilizando a pagina details*/
-.pokemon-details-card{
-    background: white;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    text-align: center;
-    max-width: 400px;
-    margin: 20px auto;
 
+/* Opcional: detalhes em modal ou overlay, manter grande */
+.pokemon-details-card {
+    padding: 20px;
+    /* de 30px para 20px */
+    max-width: 300px;
+    /* reduzido de 400px */
+}
 
+.pokemon-details-card img {
+    width: 150px;
+    /* de 200px para 150px */
+    height: 150px;
 }
-.pokemon-details-card img{
-    width: 200px;
-    height: 200px;
 
+/* Correção do typo e compactação do hover-effect */
+.hover-effect {
+    background-color: rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
 }
-.hover-effect{
-    background-color: rgba(0,0,0,0.2);
-    transform: scale(1.1);
-    transition: transform o.3s ease-in-out;
-}
+
 
 
 
@@ -135,9 +187,9 @@ button:hover{
 
 
 .pokemon-card {
-    background-color: rgba(211, 211, 211, 0.842) !important; 
+    background-color: rgba(211, 211, 211, 0.842) !important;
     color: black;
-    border: 2px solid #000000; 
+    border: 2px solid #000000;
     padding: 5px;
     display: flex;
     flex-direction: column;
@@ -145,28 +197,32 @@ button:hover{
     border-radius: 8px;
     width: 180px;
     height: 270px;
-    
+
 
 }
 
-.pokemon-card img{
+.pokemon-card img {
     margin-bottom: 0;
     padding: 0;
-    
+
 }
-.pokemon-card:hover{
+
+.pokemon-card:hover {
     transform: scale(1.05);
 }
-.pokemon-container button{
+
+.pokemon-container button {
     height: 50px;
     width: auto;
     padding-bottom: 10px;
     margin-top: -5px;
 }
-.pokemon-card h2{
+
+.pokemon-card h2 {
     font-size: 17px;
     padding: 0;
 }
+
 /* Adicionar classe do tipo de Pokémon */
 .pokemon-card h4 {
     margin-top: -5px;
@@ -189,15 +245,16 @@ button:hover{
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; 
+    align-items: flex-start;
 }
+
 #available-pokemon {
     margin-left: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     flex-direction: column;
-    align-items: flex-start; 
+    align-items: flex-start;
     margin-right: 300px;
     width: 300px;
 }
@@ -220,6 +277,7 @@ button:hover{
 #next:hover {
     background-color: #1a5aa0;
 }
+
 #pokemon-pagination {
     list-style: none;
     padding: 0;
@@ -239,29 +297,42 @@ button:hover{
     background-color: #e6b800;
 }
 
-
-    .team-container {
-        position: absolute; 
-        left: 30%;   
-        top: 40rem;
-        width: 55em;        /* largura fixa ideal para não sobrepor */
-        height: 50%;        /* ou defina uma altura fixa, ex: 400px */
-        max-width: 90%;      /* responsivo em telas menores */
-        margin: 1rem;        /* espaço externo reduzido */
-        padding: 0.5rem;     /* acolchoamento interno leve */
-        box-sizing: border-box; /* inclui padding dentro da largura */
-        overflow-y: hidden;    /* scroll vertical caso o conteúdo extrapole */
-        overflow-x: hidden ;
-        background-color: white;
-        padding: 15px;
-         border: 2px solid black;
+.team-container {
+    /* mantenha seu estilo flex ou grid aqui */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    /* outras propriedades já definidas… */
 }
+
+/* classe utilitária para esconder */
+.hidden {
+    display: none !important;
+}
+
+/* .team-container {
+        position: absolute; 
+        left: 20%;   
+        top: 40rem;
+        width:60em;        
+        height: 50%;       
+        max-width: 90%;    
+        margin: 1rem;       
+        padding: 0.5rem;    
+        box-sizing: border-box; 
+        overflow-y: hidden;    
+        overflow-x: hidden ;
+        padding: 15px;
+       background-color: transparent; 
+  border: none;                 
+
+} */
 
 .team-builder {
     position: absolute;
-    top: 120px; 
-    left: 30px; 
-    width: 320px; 
+    top: 120px;
+    left: 30px;
+    width: 320px;
     background-color: white;
     border: 2px solid black;
     padding: 15px;

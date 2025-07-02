@@ -6,7 +6,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.warn("Erro: Elemento #available-pokemon não encontrado!");
     return;
   }
-
+ const teamContainer = document.querySelector(".team-container");
+  if (teamContainer) {
+    teamContainer.style.display = "none";
+  }
   // FUNÇÃO: cria os botões Previous/Next no DOM
   function createTeamNavigationButtons() {
     if (document.getElementById("previous")) return;
@@ -84,20 +87,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   function displayPokemon(pokemon, container) {
     const card = document.createElement("figure");
     card.classList.add("pokemon-card");
-    if (container.id !== "available-pokemon") {
-      card.classList.add(`card--${pokemon.types[0].type.name}`);
-    }
+    // if (container.id !== "available-pokemon") {
+    //   card.classList.add(`card--${pokemon.types[0].type.name}`);
+    // }
 
+    // IMAGEM
     const imgDiv = document.createElement("div");
     imgDiv.classList.add("card__image-container");
     const img = document.createElement("img");
     img.src = pokemon.sprites.front_default;
     img.alt = pokemon.name;
     imgDiv.append(img);
-
+// LEGENDA
     const caption = document.createElement("figcaption");
     caption.classList.add("card__caption");
-
+// NOME
     const title = document.createElement("h2");
     title.classList.add("card__name");
     title.textContent = pokemon.name;
@@ -105,22 +109,35 @@ document.addEventListener("DOMContentLoaded", async () => {
     const type = document.createElement("h4");
     type.classList.add("card__type");
     type.textContent = pokemon.types.map(t => t.type.name).join(", ");
-
+// BOTÕES
     const addButton = document.createElement("button");
     addButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
     addButton.textContent = "Add Pokémon";
-    addButton.addEventListener("click", () => {
-      alert("OK");
+     addButton.addEventListener("click", () => {
+      // 1) Revele a seção de time
+      teamContainer.classList.remove("hidden");
+      
+      // 2) Clone o card
+      const teamCard = card.cloneNode(true);
+      
+      // 3) Remova somente o botão “Add” do clone
+      const clonedAdd = teamCard.querySelector(".btn-outline-secondary");
+      if (clonedAdd) clonedAdd.remove();
+      
+      // 4) Insira o clone no seu time
+      teamContainer.appendChild(teamCard);
+
+
     });
 
     const detailsButton = document.createElement("button");
     detailsButton.classList.add("btn-sm", "btn-danger");
     detailsButton.textContent = "Detalhes";
-    Object.assign(detailsButton.style, {
-      marginLeft: "10px",
-      fontWeight: "light",
-      paddingTop: "15px",
-    });
+    // Object.assign(detailsButton.style, {
+    //   marginLeft: "10px",
+    //   fontWeight: "light",
+    //   paddingTop: "15px",
+    // });
     detailsButton.addEventListener("click", () => {
       alert(`
         ${pokemon.sprites.other["official-artwork"].front_default}
@@ -131,7 +148,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         Abilities: ${pokemon.abilities.map(a => a.ability.name).join(", ")}
       `);
     });
-
+    
     caption.append(addButton, title, type, detailsButton);
     card.append(imgDiv, caption);
     container.append(card);

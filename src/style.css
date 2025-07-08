@@ -1,3 +1,6 @@
+/* ============================= */
+/* 1. Reset e Tipografia Geral   */
+/* ============================= */
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
 * {
@@ -7,40 +10,38 @@
 }
 
 body {
-    background-color: #e5e5e5;
+    background-color: #f5f5f5;
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f5f5f5;
     padding: 20px;
 }
 
+/* ============================= */
+/* 2. Navegação                  */
+/* ============================= */
 #nav {
     width: 100%;
     height: 5rem;
     display: flex;
-    flex-direction: row;
-    margin-top: 1rem;
-    padding: 1rem;
-    gap: 5px;
-    font: 34px bold italic;
     align-items: center;
-
+    gap: 5px;
+    padding: 1rem;
+    font: italic bold 34px/1 'Russo One', Arial, sans-serif;
 }
 
 #nav img {
-    margin-top: 1rem;
+    width: 35px;
+    height: 35px;
 }
 
 #nav p {
-    display: flex;
-    padding: 5px;
-    margin-top: 1rem;
     font: 700 34px italic;
-
+    padding: 5px;
 }
 
-
-
+/* ============================= */
+/* 3. Inputs & Botões Globais    */
+/* ============================= */
 input {
     padding: 10px;
     width: 250px;
@@ -48,294 +49,383 @@ input {
     border-radius: 5px;
     font-size: 16px;
     margin-right: 10px;
-    padding: 10px;
 }
 
 button {
-    padding: 10px 15px;
+    padding: 10px;
     background-color: #ffcc00;
     border: none;
     border-radius: 5px;
     font-size: 16px;
-    cursor: pointer;
-    /* color: rgb(255, 255, 255); */
     font-weight: bold;
-    padding: 10px;
+    cursor: pointer;
 }
 
 button:hover {
     background-color: #e6b800;
 }
 
-/* pokemon cards */
-
-
-#pokemon-container {
-    margin-top: 20px;
+/* ============================= */
+/* 4. Lista de Pokémons          */
+/* ============================= */
+#available-pokemon {
+    margin-left: 10px;
+    margin-right: 300px;
+    width: 100%;
+    max-width: 480px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    gap: 0px !important;
 }
 
-/* Card simples e compacto */
-.pokemon-card {
+/* Cards na lista disponível */
+#available-pokemon .pokemon-card {
     background-color: #fff;
-    border: 1px solid #ddd;
-    /* borda clara */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 12px 16px;
-    margin: 12px;
-    text-align: center;
-    width: 180px;
-    /* largura fixa */
-    box-sizing: border-box;
-    transition: transform 0.2s ease-in-out;
-}
-
-
-.pokemon-card:hover {
-    transform: scale(1.03);
-}
-
-.pokemon-card img {
-    width: 80px;
-    /* reduzido de 120px */
-    height: 80px;
-
-}
-
-/* Títulos e tipos com fonte menor */
-.pokemon-card h2 {
-    font-size: 1rem;
-    /* reduzido */
-    margin: 6px 0 4px;
-}
-
-
-/* Nome do Pokémon */
-.pokemon-card .card__name {
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: capitalize;
-    margin: 8px 0;
-}
-
-
-/* Botões ficam mais compactos */
-.pokemon-card .btn {
-    border-radius: 4px;
-    font-size: 14px;
-    padding: 8px 12px;
-    cursor: pointer;
-    border: none;
-}
-
-.pokemon-card .btn-outline-secondary {
-    background-color: #e6bf12;
-    /* azul principal */
-    color: #fff;
-}
-
-.pokemon-card .btn-danger {
-    background-color: #e6bf12;
-    /* tom ciano */
-    color: #fff;
-    margin-left: 8px;
-}
-
-
-/* Estilizando a pagina details*/
-
-/* Opcional: detalhes em modal ou overlay, manter grande */
-.pokemon-details-card {
-    padding: 20px;
-    /* de 30px para 20px */
-    max-width: 300px;
-    /* reduzido de 400px */
-}
-
-.pokemon-details-card img {
-    width: 150px;
-    /* de 200px para 150px */
-    height: 150px;
-}
-
-/* Correção do typo e compactação do hover-effect */
-.hover-effect {
-    background-color: rgba(0, 0, 0, 0.2);
-    transform: scale(1.05);
-    transition: transform 0.3s ease-in-out;
-}
-
-
-
-
-/*  Estilos para cada tipo de Pokémon */
-
-/* .card--fire { background: linear-gradient(0deg, rgba(199,24,0,1) 10%, rgba(252,194,69,1) 100%); }
-.card--water { background: linear-gradient(120deg, #1CB5E0 0%, #000851 100%); }
-.card--grass { background: linear-gradient(140deg, rgba(196,218,61,1) 0%, rgba(110,127,14,1) 69%, rgba(39,80,9,1) 100%); }
-.card--electric { background: linear-gradient(90deg, rgba(255,222,0,1) 34%, rgba(232,255,153,1) 83%); }
-.card--bug { background: linear-gradient(50deg, #A8B820, #6D7815); }
-.card--normal { background: linear-gradient(110deg, #FDBB2D 0%, #3A1C71 100%); }
-.card--psychic { background: linear-gradient(140deg, rgba(255,167,249,1) 0%, rgba(255,44,195,1) 39%, rgba(255,227,167,1) 100%); }
-.card--ice { background: linear-gradient(230deg, rgba(202,234,246,1) 0%, rgba(160,234,241,1) 46%, rgba(111,184,235,1) 100%); } 
-
-
-*/
-
-
-.pokemon-card {
-    background-color: rgba(211, 211, 211, 0.842) !important;
-    color: black;
-    border: 2px solid #000000;
-    padding: 5px;
+    width: 140px;
+    height: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 8px;
-    width: 180px;
-    height: 270px;
-
-
-}
-
-.pokemon-card img {
-    margin-bottom: 0;
+    transition: transform 0.2s ease-in-out;
     padding: 0;
-
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    border: 1px solid #f5eaea79;
+    margin: 0;
 }
 
-.pokemon-card:hover {
-    transform: scale(1.05);
+#available-pokemon .pokemon-card:hover {
+    transform: scale(1.03);
 }
 
-.pokemon-container button {
-    height: 50px;
-    width: auto;
-    padding-bottom: 10px;
-    margin-top: -5px;
+#available-pokemon .pokemon-card img {
+    width: 80px;
+    height: 80px;
+    margin-top: 0;
 }
 
-.pokemon-card h2 {
-    font-size: 17px;
-    padding: 0;
-}
-
-/* Adicionar classe do tipo de Pokémon */
-.pokemon-card h4 {
-    margin-top: -5px;
-    border-radius: 5px;
+#available-pokemon .card__name {
+    font-size: 1rem;
     font-weight: bold;
-    color: rgba(99, 99, 99, 0.781);
+    text-transform: capitalize;
+    margin: 8px 0 4px;
+
+}
+
+#available-pokemon .card__type {
+    font-size: 0.8rem;
     text-transform: uppercase;
-    font-size: 12px;
-    padding: 10px;
+    color: #666;
+    margin-bottom: 8px;
 }
 
-#pokemon-list {
-    position: relative;
-    top: 400px;
-    width: 220px;
-    height: 80vh;
-    overflow-y: auto;
-    background-color: transparent;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+#available-pokemon .btn {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin: 4px 2px;
 }
 
-#available-pokemon {
-    margin-left: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-right: 300px;
-    width: 300px;
+#available-pokemon .btn-outline-secondary {
+    background-color: #e6bf12;
+    color: #fff;
 }
 
-
-#previous {
-    background-color: red;
-    color: white;
+#available-pokemon .btn-danger {
+    background-color: #e6bf12;
+    color: #fff;
+    margin: 0;
 }
 
-#next {
-    background-color: #2a75bb;
-    color: white;
-}
-
-#previous:hover {
-    background-color: darkred;
-}
-
-#next:hover {
-    background-color: #1a5aa0;
-}
-
-#pokemon-pagination {
-    list-style: none;
-    padding: 0;
-}
-
-#pokemon-pagination li {
-    cursor: pointer;
+.team-card-footer {
+    width: 100%;
+    background: #fff;
     padding: 8px;
-    margin: 5px 0;
-    background-color: #ffcc00;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
+    border-radius: 0 0 12px 12px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
 }
 
-#pokemon-pagination li:hover {
-    background-color: #e6b800;
+/* ajustes internos, se necessário */
+.team-card-footer .team-input {
+    flex: 1;
+    margin: 0;
+
 }
+
+.team-card-footer .delete-btn {
+    margin: 0;
+    padding: 5px;
+   
+}
+
+/* ============================= */
+/* 5. Gradientes por Tipo        */
+/* ============================= */
+.card--fire {
+    background: linear-gradient(0deg, #C71800 10%, #FCC245 100%);
+}
+
+.card--water {
+    background: linear-gradient(120deg, #1CB5E0 0%, #000851 100%);
+}
+
+.card--grass {
+    background: linear-gradient(140deg, #C4DA3D 0%, #6E7F0E 69%, #275009 100%);
+}
+
+.card--electric {
+    background: linear-gradient(90deg, #FFDE00 34%, #E8FF99 83%);
+}
+
+.card--bug {
+    background: linear-gradient(50deg, #A8B820, #6D7815);
+}
+
+.card--normal {
+    background: linear-gradient(110deg, #FDBB2D 0%, #3A1C71 100%);
+}
+
+.card--psychic {
+    background: linear-gradient(140deg, #FFA7F9 0%, #FF2CC3 39%, #FFE3A7 100%);
+}
+
+.card--ice {
+    background: linear-gradient(230deg, #CAEAF6 0%, #A0EAF1 46%, #6FB8EB 100%);
+}
+
 
 .team-container {
-    /* mantenha seu estilo flex ou grid aqui */
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    /* outras propriedades já definidas… */
+    position: absolute;
+    left: 20%;
+    top: 40rem;
+    width: 60em;
+    height: 50%;
+    max-width: 90%;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: transparent;
+    border: none;
 }
 
-/* classe utilitária para esconder */
-.hidden {
+.team-container.hidden {
     display: none !important;
 }
 
-/* .team-container {
-        position: absolute; 
-        left: 20%;   
-        top: 40rem;
-        width:60em;        
-        height: 50%;       
-        max-width: 90%;    
-        margin: 1rem;       
-        padding: 0.5rem;    
-        box-sizing: border-box; 
-        overflow-y: hidden;    
-        overflow-x: hidden ;
-        padding: 15px;
-       background-color: transparent; 
-  border: none;                 
-
-} */
-
-.team-builder {
-    position: absolute;
-    top: 120px;
-    left: 30px;
-    width: 320px;
-    background-color: white;
-    border: 2px solid black;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+.team-container h2 {
+    margin-bottom: 1rem;
+    text-align: center;
 }
+
+.team-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 800px;
+
+}
+
+/* inclinação só no primeiro card */
+.team-cards .pokemon-card:first-child {
+    transform: rotate(-3deg);
+    transform-origin: center;
+    transition: transform 0.25s ease-in-out;
+}
+
+.team-cards .pokemon-card:first-child:hover {
+    transform: rotate(0deg) translateY(-6px);
+}
+
+/* cards internos do time */
+.team-container .pokemon-card {
+    position: relative;
+    width: 180px;
+    padding: 16px;
+    margin: 0.25rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s;
+
+}
+
+.team-container .pokemon-card:hover {
+    transform: translateY(-4px);
+}
+
+.team-container .card__image-container {
+    width: 100%;
+    height: 96px;
+        background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.811),
+    rgba(0, 0, 0, 0.168)
+  );
+
+    border: 2px solid rgba(15, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+
+.team-container .card__image-container img {
+    width: 150px;
+    height: 120px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 2px #fff);
+}
+
+.team-input {
+    width: 100%;
+    padding: 6px 8px;
+    margin-bottom: 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.team-input::placeholder {
+    color: #555;
+}
+
+.delete-btn {
+    background: rgba(255, 255, 255, 0.9);
+    color: #c00;
+    border: 1px solid #c00;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.delete-btn:hover {
+    background: #ffecec;
+    transform: translateY(-2px);
+}
+
+/* ============================= */
+/* 7. Utility Classes            */
+/* ============================= */
+.hidden {
+    display: none !important;
+
+}
+
+
+
+.save-area+div {
+    position: static !important;
+    top: auto !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    margin: 30px 0 0 40px !important;
+}
+
+/* Previous (branco) e Next (vermelho) */
+#previous {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+    padding: 8px 16px !important;
+    border-radius: 5px !important;
+}
+
+#next {
+    background-color: red !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 5px !important;
+}
+
+#previous:hover,
+#next:hover {
+    opacity: 0.8 !important;
+}
+
+
+#available-pokemon {
+    display: flex;
+    flex-direction: column;
+    gap: 0 !important;
+    margin-left: 10px;
+    margin-right: 300px;
+}
+
+/* cards brancos, tamanho fixo */
+#available-pokemon .pokemon-card {
+    background: #fff;
+    width: 140px;
+    height: 220px;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc !important;
+    border-radius: 4px;
+}
+
+/* layout vertical: nome → Add → Details */
+#available-pokemon .card__caption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#available-pokemon .card__type {
+    display: none;
+ 
+}
+
+#available-pokemon .card__name {
+    order: 1;
+    margin: 8px 0 4px;
+}
+
+#available-pokemon .btn-outline-secondary {
+    order: 2;
+    margin: 4px 0 0;
+    
+}
+
+#available-pokemon .btn-danger {
+    order: 3;
+    margin: 4px 0 0;
+}
+
+
+
+/* figcaption branco nos cards */
+.pokemon-card figcaption {
+    background: #fff !important;
+}
+/* Nome real do Pokémon (ex: machoke) abaixo do input */
+.team-card-footer .team-card-name {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+  text-transform: capitalize;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+

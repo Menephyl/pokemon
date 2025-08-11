@@ -1,0 +1,32 @@
+.hidden {
+  display: none;
+}
+
+/* Base da tabela */
+.teams-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.teams-table th,
+.teams-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Tema Azul (isolado) */
+.table-blue thead th {
+  background-color: #1976D2; /* Azul escuro */
+  color: #FFFFFF;
+}
+.table-blue tbody tr:nth-child(even) {
+  background-color: #E3F2FD; /* Azul claríssimo */
+}
+.table-blue tbody tr:hover {
+  background-color: #BBDEFB; /* Azul intermediário */
+}
+.table-blue th,
+.table-blue td {
+  border-color: #BBDEFB; /* borda suave, mesmo tom do hover */
+}

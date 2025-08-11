@@ -6,6 +6,7 @@
   <link rel="icon" href="https://cdn.pixabay.com/photo/2016/09/01/09/31/pokemon-1635610_960_720.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="index.css">
   <title>POKÉDEX - My teams page</title>
 </head>
 
@@ -27,10 +28,29 @@
     </nav>
 
   </div>
-  <h1 class="team-status">No teams found</h1>
+
+  
+  <!-- Mensagem quando não há teams -->
+  <h1 id="no-teams-msg" class="team-status">No teams found</h1>
+
+  <!-- Container da tabela, escondido por padrão -->
+  <div id="teams-container" class="hidden">
+    <h2>My Teams</h2>
+    <table id="teams-table" class="teams-table table-blue">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Team Name</th>
+          <th># Pokémons</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="team-table-body"></tbody>
+    </table>
+  </div>
 
   <script src="src/main.js"></script>
-  <script src="src/fetch.js"></script>
+  <script src="src/team-list.js" defer></script>
 </body>
 
 </html>

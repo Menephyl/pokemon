@@ -91,6 +91,22 @@ document.addEventListener("DOMContentLoaded", function () {
   })
   document.body.insertBefore(createTeamMainBtn, document.querySelector("main"));
 
+document.addEventListener("DOMContentLoaded", () => {
+  const container    = document.getElementById("teams-container");
+  const noTeamsMsg   = document.getElementById("no-teams-msg");
+  const tbody        = document.getElementById("team-table-body");
+  const savedTeams   = JSON.parse(localStorage.getItem("pokeTeams")) || [];
+
+  if (savedTeams.length === 0) {
+    container.classList.add("hidden");
+    noTeamsMsg.classList.remove("hidden");
+    return;
+  }
+
+  
+
+  // (mantenha aqui a lógica de delete/edit já implementada)
+});
  
 });
 

@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const imgDiv = document.createElement("div");
     imgDiv.classList.add("card__image-container");
     const img = document.createElement("img");
-   img.src = pokemon.sprites.other["official-artwork"].front_default;
+    img.src = pokemon.sprites.other["official-artwork"].front_default;
     img.alt = pokemon.name;
     imgDiv.append(img);
     // LEGENDA
@@ -218,13 +218,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       // cria o footer branco
       const footerDiv = document.createElement("div");
 
-      
-      footerDiv.classList.add("team-card-footer");
-      footerDiv.append(nameInput,nameLabel, deleteBtn);
 
-      
+      footerDiv.classList.add("team-card-footer");
+      footerDiv.append(nameInput, nameLabel, deleteBtn);
+
+
       // 7) monta o card
-      cap.append(title, imgDiv, nameInput,footerDiv, deleteBtn, );
+      cap.append(title, imgDiv, nameInput, footerDiv, deleteBtn,);
       teamCard.appendChild(cap);
 
       // 8) adiciona ao container do time
@@ -236,16 +236,59 @@ document.addEventListener("DOMContentLoaded", async () => {
     detailsButton.classList.add("btn-sm", "btn-danger");
     detailsButton.textContent = "Detalhes";
 
-    detailsButton.addEventListener("click", () => {
-      alert(`
-        ${pokemon.sprites.other["official-artwork"].front_default}
-        Details for ${pokemon.name}:
-        Type: ${pokemon.types.map(t => t.type.name).join(", ")}
-        Height: ${pokemon.height / 10} cm
-        Weight: ${pokemon.weight / 10} kg
-        Abilities: ${pokemon.abilities.map(a => a.ability.name).join(", ")}
-      `);
+detailsButton.addEventListener("click", () => {
+  const modal     = document.getElementById("pokemon-modal");
+  const modalBody = modal.querySelector(".modal-body");
+
+const gifUrl = `https://play.pokemonshowdown.com/sprites/ani/${pokemon.name.toLowerCase()}.gif`;
+
+const stats = pokemon.stats.map(stat => {
+  return `<li><strong>${stat.stat.name.replace("-", " ")}:</strong> ${stat.base_stat}</li>`;
+}).join("");
+
+const abilities = pokemon.abilities.map((a, i) => {
+  return `<li>${i + 1}° Ability: ${a.ability.name}</li>`;
+}).join("");
+
+modalBody.innerHTML = `
+  <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}" />
+  <h2>${pokemon.name}</h2>
+  <p><strong>Type:</strong> ${pokemon.types.map(t => t.type.name).join(", ")}</p>
+  <p><strong>Height:</strong> ${pokemon.height / 10} cm</p> 
+  <p><strong>Weight:</strong> ${pokemon.weight / 10} kg</p>
+
+  <div class="modal-section">
+    <h3>Stats:</h3>
+    <ul>${stats}</ul>
+  </div>
+
+  <div class="modal-section">
+    <h3>Abilities:</h3>
+    <ul>${abilities}</ul>
+  </div>
+
+  <img src="${gifUrl}" alt="${pokemon.name} animated sprite" class="pixel-sprite" />
+  
+`;
+
+
+  modal.classList.remove("hidden");
+});
+
+    // fecha modal ao clicar no X
+    document.querySelector(".modal-close").addEventListener("click", () => {
+      document.getElementById("pokemon-modal").classList.add("hidden");
     });
+
+    // fecha modal ao clicar fora
+    document.getElementById("pokemon-modal").addEventListener("click", e => {
+      if (e.target.id === "pokemon-modal") {
+        e.target.classList.add("hidden");
+      }
+    });
+
+
+
 
     caption.append(addButton, title, type, detailsButton);
     card.append(imgDiv, caption);
@@ -261,4 +304,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   createTeamNavigationButtons();
   navigationPokemonOptions();
   await loadPage();
+
+
+teamCard.dataset.name = pokemon.name;
+teamCard.dataset.types = pokemon.types.map(t => t.type.name).join(",")
+
 });

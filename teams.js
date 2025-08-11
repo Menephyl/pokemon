@@ -227,6 +227,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       cap.append(title, imgDiv, nameInput, footerDiv, deleteBtn,);
       teamCard.appendChild(cap);
 
+      // 9) Defino os dados que usarei mais tarde ao salvar
+      teamCard.dataset.name = pokemon.name;
+      teamCard.dataset.types = pokemon.types.map(t => t.type.name).join(",");
+      
       // 8) adiciona ao container do time
       const cardsWrapper = document.querySelector(".team-cards");
       cardsWrapper.appendChild(teamCard);
@@ -236,21 +240,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     detailsButton.classList.add("btn-sm", "btn-danger");
     detailsButton.textContent = "Detalhes";
 
-detailsButton.addEventListener("click", () => {
-  const modal     = document.getElementById("pokemon-modal");
-  const modalBody = modal.querySelector(".modal-body");
+    detailsButton.addEventListener("click", () => {
+      const modal = document.getElementById("pokemon-modal");
+      const modalBody = modal.querySelector(".modal-body");
 
-const gifUrl = `https://play.pokemonshowdown.com/sprites/ani/${pokemon.name.toLowerCase()}.gif`;
+      const gifUrl = `https://play.pokemonshowdown.com/sprites/ani/${pokemon.name.toLowerCase()}.gif`;
 
-const stats = pokemon.stats.map(stat => {
-  return `<li><strong>${stat.stat.name.replace("-", " ")}:</strong> ${stat.base_stat}</li>`;
-}).join("");
+      const stats = pokemon.stats.map(stat => {
+        return `<li><strong>${stat.stat.name.replace("-", " ")}:</strong> ${stat.base_stat}</li>`;
+      }).join("");
 
-const abilities = pokemon.abilities.map((a, i) => {
-  return `<li>${i + 1}° Ability: ${a.ability.name}</li>`;
-}).join("");
+      const abilities = pokemon.abilities.map((a, i) => {
+        return `<li>${i + 1}° Ability: ${a.ability.name}</li>`;
+      }).join("");
 
-modalBody.innerHTML = `
+      modalBody.innerHTML = `
   <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}" />
   <h2>${pokemon.name}</h2>
   <p><strong>Type:</strong> ${pokemon.types.map(t => t.type.name).join(", ")}</p>
@@ -272,8 +276,8 @@ modalBody.innerHTML = `
 `;
 
 
-  modal.classList.remove("hidden");
-});
+      modal.classList.remove("hidden");
+    });
 
     // fecha modal ao clicar no X
     document.querySelector(".modal-close").addEventListener("click", () => {
@@ -306,7 +310,5 @@ modalBody.innerHTML = `
   await loadPage();
 
 
-teamCard.dataset.name = pokemon.name;
-teamCard.dataset.types = pokemon.types.map(t => t.type.name).join(",")
 
 });

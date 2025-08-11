@@ -1,11 +1,10 @@
+// layout.js
 document.addEventListener("DOMContentLoaded", async () => {
-
- document.body.style.fontFamily = "Russo One,sans-serif";
+  document.body.style.fontFamily = "Russo One,sans-serif";
   document.body.style.backgroundColor = "#f4f4f4";
   document.body.style.textAlign = "center";
 
-
- // header
+  // header
   let header = document.querySelector("header");
   Object.assign(header.style, {
     backgroundColor: "#ffcb05",
@@ -40,39 +39,49 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     button.addEventListener("mouseleave", () => {
       button.style.backgroundColor = "transparent";
+    });
+  }
 
-   });
-}
 
-  let nav = document.getElementById("nav");  // barra de navegação
+
+  let nav = document.getElementById("nav");
   Object.assign(nav.style, {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     padding: "1rem",
   });
 
-  Object.assign(links.style, {
-    display: "flex",
-    gap: "1rem",
-    marginLeft: "auto",
-  });
+  const linkGroup = nav.querySelector('.links');
 
-const myTeamsBtn = document.querySelector(".btn-menu");  // botões de navegação entre as duas principais paginas do site 
+  nav.style.display = 'flex';
+  nav.style.alignItems = 'center';
+
+  /* empurra o grupo de links pra direita */
+  linkGroup.style.marginLeft = 'auto';
+  linkGroup.style.display = 'flex';
+  linkGroup.style.gap = '1rem';
+
+
+
+  styleMenuButton(document.querySelector(".btn-menu"));
+  styleMenuButton(document.querySelector(".btn-menu2"));
+
+  // highlight the “Create Team” button
   const createTeamBtn = document.querySelector(".btn-menu2");
-  styleMenuButton(myTeamsBtn);
-  styleMenuButton(createTeamBtn);
-
   createTeamBtn.style.fontWeight = "bold";
   createTeamBtn.style.textDecoration = "underline";
 
-  let searchBar = document.getElementById("search-bar");  // antes barra de pesquisa, agora faz parte do layout de salvamento do time
-  searchBar.style.marginTop = "4.5rem";
-  searchBar.style.paddingBottom = "1.4rem";
-  searchBar.style.borderBottom = "1px  solid #A9A9A9";
+  // style search‐bar area
+  let searchBar = document.getElementById("search-bar");
+  Object.assign(searchBar.style, {
+    marginTop: "4.5rem",
+    paddingBottom: "1.4rem",
+    borderBottom: "1px solid #A9A9A9",
+  });
 
-  const intro = document.createElement("h4");  // texto de introdução
-  searchBar.appendChild(intro);
+  // prompt text
+  const intro = document.createElement("h4");
   intro.innerText = "What will be the name of your pokemon team?";
   Object.assign(intro.style, {
     display: "flex",
@@ -84,10 +93,10 @@ const myTeamsBtn = document.querySelector(".btn-menu");  // botões de navegaç�
     fontSize: "24px",
     fontWeight: "400",
   });
+  searchBar.appendChild(intro);
 
-  let nameTeamInput = document.querySelector("#name-team"); // caixa para colcar o nome do time
-
-  Object.assign(nameTeamInput.style, {
+  // team‐name input styling
+  Object.assign(document.querySelector("#name-team").style, {
     display: "flex",
     position: "relative",
     marginTop: "1.5rem",
@@ -95,54 +104,39 @@ const myTeamsBtn = document.querySelector(".btn-menu");  // botões de navegaç�
     textAlign: "justify",
     height: "30px",
     borderRadius: "1px",
-    textDecoration: "none",
     gap: "1rem",
     padding: "0.5rem",
   });
 
-const saveArea = document.querySelector(".save-area");  // area para salvar o time
-if (saveArea) {
-    saveArea.style.display = "flex";
-    saveArea.style.flexDirection = "row";
-    saveArea.style.padding = "0.5rem";
-} else {
-    console.warn("Elemento .save-area não encontrado!");
-}
+  // save‐area styling
+  const saveArea = document.querySelector(".save-area");
+  if (!saveArea) console.warn("Elemento .save-area não encontrado!");
   Object.assign(saveArea.style, {
     display: "flex",
     flexDirection: "row",
-    padding: "0.5rem",
-    fontFamily: "Times new roman,sans serif",
-    backgroundColor: "light",
-    justifyContent: "flex-end", // Isso alinha o botão à direita
     padding: "1.5rem",
+    justifyContent: "flex-end",
     marginRight: "29rem",
-    
     gap: "20px",
+    fontFamily: "Times new roman,sans serif",
   });
-  let hint = document.querySelector(".r");  // choose your pokemon 
-  Object.assign(hint.style, {
+
+  // hint text styling
+  Object.assign(document.querySelector(".r").style, {
     position: "absolute",
     marginRight: "20rem",
     padding: "20px",
     fontSize: "20px",
   });
 
-
-
-  let saveButton = document.querySelector("#save-team"); // botao para salvar o time
-  
-  Object.assign(saveButton.style, {
-    display: "flex",
-    marginLeft: "auto",
+  // Save‐team button styling
+  Object.assign(document.querySelector("#save-team").style, {
     backgroundColor: "#2a75bb",
     color: "white",
-    fontWeight: "lightm",
   });
 
-// paginação da lista de pokemons adicionáveis 
-  let grids = document.querySelectorAll(".grid"); // para  a lista de pokemons da api
-  grids.forEach((grid) => {
+  // grid list styling
+  document.querySelectorAll(".grid").forEach(grid => {
     Object.assign(grid.style, {
       display: "flex",
       flexWrap: "wrap",
@@ -150,67 +144,108 @@ if (saveArea) {
       gap: "2rem",
       padding: "3rem",
     });
-  }); 
+  });
 
-  const p = document.querySelector(".pokemon-list h2");
-
-
+  // pagination buttons (if not present)
   function createTeamNavigationButtons() {
-    if (!document.getElementById("previous")) {
-      const buttonContainer = document.createElement("div"); // container for the buttons
-      Object.assign(buttonContainer.style, {
-        display: "flex",
-        justifyContent: "flex-start",
-        gap: "10px",
-        marginBottom: "10px",
-        flexDirection: "row",
-        position: "relative",
-        marginLeft: "40px",
-      });
-      const previousButton = document.createElement("button");  // botao de voltar
-      previousButton.textContent = "<< Previous";
-      previousButton.id = "previous";
-      Object.assign(previousButton.style, {
-        backgroundColor: "red",
-        border: "none",
-        cursor: "pointer",
-        fontSize: "13px",
-        color: "white",
-        maxWidth: "100px",
-        height: "50px",
-        padding: "10px 20px",
-        marginTop: "10px",
-      });
-      const nextButton = document.createElement("button"); // botao de proximo
-      nextButton.textContent = "Next >>";
-      nextButton.id = "next";
-      Object.assign(nextButton.style, {
-        padding: "10px 20px",
-        backgroundColor: "#2a75bb",
-        color: "White",
-        border: "none",
-        cursor: "pointer",
-        fontSize: "13px",
-        width: "100px",
-        height: "50px",
-        marginTop: "10px",
-      });
+    if (document.getElementById("previous")) return;
 
-      buttonContainer.appendChild(previousButton);   // organiza os botoes conforme o planejamento do layout
-      previousButton.addEventListener("click", () => {
-        const currentPage = parseInt(localStorage.getItem("currentPage")) || 1;
-        if (currentPage > 1) {
-          localStorage.setItem("currentPage", currentPage - 1);
-          window.location.reload();
-        }
-      }); 
-      buttonContainer.appendChild(nextButton);
-      document.querySelector(".save-area").after(buttonContainer);
-    }
+    const buttonContainer = document.createElement("div");
+    Object.assign(buttonContainer.style, {
+      display: "flex",
+      justifyContent: "flex-start",
+      gap: "10px",
+      marginBottom: "10px",
+      position: "relative",
+      marginLeft: "40px",
+    });
+
+    const previousButton = document.createElement("button");
+    previousButton.id = "previous";
+    previousButton.textContent = "<< Previous";
+    Object.assign(previousButton.style, {
+      backgroundColor: "red",
+      border: "none",
+      cursor: "pointer",
+      color: "white",
+      fontSize: "13px",
+      height: "50px",
+      padding: "10px 20px",
+      marginTop: "10px",
+    });
+    buttonContainer.appendChild(previousButton);
+
+    const nextButton = document.createElement("button");
+    nextButton.id = "next";
+    nextButton.textContent = "Next >>";
+    Object.assign(nextButton.style, {
+      backgroundColor: "#2a75bb",
+      border: "none",
+      cursor: "pointer",
+      color: "white",
+      fontSize: "13px",
+      height: "50px",
+      padding: "10px 20px",
+      marginTop: "10px",
+    });
+    buttonContainer.appendChild(nextButton);
+
+    document.querySelector(".save-area")?.after(buttonContainer);
+
+    // hook to reload page if you’re persisting currentPage in localStorage
+    previousButton.addEventListener("click", () => {
+      const currentPage = parseInt(localStorage.getItem("currentPage")) || 1;
+      if (currentPage > 1) {
+        localStorage.setItem("currentPage", currentPage - 1);
+        window.location.reload();
+      }
+    });
+    nextButton.addEventListener("click", () => {
+      const currentPage = parseInt(localStorage.getItem("currentPage")) || 1;
+      localStorage.setItem("currentPage", currentPage + 1);
+      window.location.reload();
+    });
   }
-   
 
   createTeamNavigationButtons();
-  
-  
-})
+
+  // ——————— SAVE TEAM LOGIC ———————
+  const saveBtn = document.querySelector("#save-team");
+  saveBtn.addEventListener("click", () => {
+    const nameInput = document.querySelector("#name-team");
+    const teamName = nameInput.value.trim();
+    if (!teamName) {
+      alert("Por favor, insira um nome para o time.");
+      return;
+    }
+
+    const cards = document.querySelectorAll(".team-cards .pokemon-card");
+    if (cards.length === 0) {
+      alert("Selecione ao menos um Pokémon para salvar o time.");
+      return;
+    }
+
+    // build array of pokémons
+    const pokemons = Array.from(cards).map(card => {
+      const originalName = card.dataset.name;
+      const types = card.dataset.types.split(",");
+      const inputEl = card.querySelector(".team-input");
+      // fallback to originalName if no custom value
+      const customName =
+        inputEl && inputEl.value.trim() ? inputEl.value.trim() : originalName;
+      return { originalName, customName, types };
+    });
+
+    // load existing, assign new ID
+    const stored = JSON.parse(localStorage.getItem("pokeTeams")) || [];
+    const newId = stored.length;
+    const newTeam = { id: newId, name: teamName, pokemons };
+
+    stored.push(newTeam);
+    localStorage.setItem("pokeTeams", JSON.stringify(stored));
+
+    // redirect with hash so index.html highlights it
+    window.location.href = `index.html#team-${newId}`;
+  });
+  // ——————— end SAVE TEAM LOGIC ———————
+});

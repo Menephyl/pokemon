@@ -5,8 +5,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)  
 [![Deploy: Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://seu-projeto.vercel.app)
+<img width="1834" height="914" alt="Captura de tela 2025-08-11 203206" src="https://github.com/user-attachments/assets/53d143b5-7d62-42bd-a9f0-f2400a11f264" />
 
----![alt text](image.png)
 
 ## Descrição do Projeto
 

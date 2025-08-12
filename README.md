@@ -43,7 +43,7 @@ https://menephylpokedex.vercel.app/
 ## Tecnologias Utilizadas
 
 - JavaScript (ES6+)  
-- Verto.js (estrutura de projeto e roteamento)  
+
 - CSS3 com Flexbox e variáveis personalizadas  
 - PokeAPI como fonte de dados  
 - Vercel para deploy contínuo

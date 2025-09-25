@@ -1,76 +1,50 @@
+<!-- createTeams.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/style.css">
-    <link rel="icon" href="https://cdn.pixabay.com/photo/2016/09/01/09/31/pokemon-1635610_960_720.png">
-    <link rel="stylesheet" href="responsivo.css">
-
-    <title>Create Teams page </title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="./src/style.css"/>
+  <link rel="stylesheet" href="./src/responsivo.css"/>
+  <title>Create Teams</title>
 </head>
 <body>
-    <header>
-        <h1>Pokédex - My poke Team</h1>
-      </header>
-      <div id="menu">
-        <nav id="nav">
-          <img
-            src="https://static.vecteezy.com/system/resources/previews/007/409/979/original/people-icon-design-avatar-icon-person-icons-people-icons-are-set-in-trendy-flat-style-user-icon-set-vector.jpg"
-            alt=" ico"
-            width="35px"
-            height="35px"
-          />
-          <p>Hey Brother!</p>
-          <div class="links">
-            <a href="index.html" class="btn-menu">My Teams</a>
-            <a href="#" class="btn-menu2">Create Team</a>
-          </div>
-  
-        </nav>
-      </div>
-
-
-
-    <main>
-        <section id="search-bar">
-     
-         <input type="text" id="name-team" placeholder="Name Team">
-      
-        
-        </section>
-        <div class="save-area">
-          <p class="r">Choose the pokemons you want on your team when your're done. Click for save your progress</p>
-          <button id="save-team"> Save Team</button>
-        </div>
-       
-
-         
-   
-    <div id="available-pokemon"  class="grid pokemon-list"></div>
-       
-        <section id="team-section" class="team-container hidden">
-        
-          <h2 class="">Your Team</h2>  
-<div class="team-cards"></div>
-
-           
-        </section> 
-      </main>
-  <!-- Modal Pokémon -->
-<div id="pokemon-modal" class="modal hidden">
-  <div class="modal-content">
-    <span class="modal-close">&times;</span>
-    <div class="modal-body"></div>
+  <header>
+    <h1>Pokédex - My poke Team</h1>
+  </header>
+  <nav id="nav" class="nav-base">
+    <img src="https://static.vecteezy.com/system/resources/previews/007/409/979/original/people-icon-design-avatar-icon-person-icons-people-icons-are-set-in-trendy-flat-style-user-icon-set-vector.jpg"
+         alt="ícone" width="35" height="35"/>
+    <p>Hey Brother!</p>
+    <div class="links links-base">
+      <a href="index.html" class="menu-btn">My Teams</a>
+      <a href="#" class="menu-btn active-btn">Create Team</a>
+    </div>
+  </nav>
+  <main>
+    <section id="search-bar" class="search-bar">
+      <h4 class="intro-text">What will be the name of your pokemon team?</h4>
+      <input type="text" id="name-team" class="team-name-input" placeholder="Name Team"/>
+    </section>
+    <div class="save-area create-main">
+      <p class="save-hint">Choose the pokemons you want on your team when you’re done. Click to save your progress.</p>
+      <button id="save-team" class="save-btn">Save Team</button>
+    </div>
+    <div id="available-pokemon" class="pokemon-grid"></div>
+    <section id="team-section" class="team-container hidden">
+      <h2 class="team-title">Your Team</h2>
+      <div class="team-cards"></div>
+    </section>
+  </main>
+  <div id="pokemon-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div class="modal-body"></div>
+    </div>
   </div>
-</div>
-
+  <script src="teams.js" defer></script>
+  <script src="layout.js" defer></script>
+  <script src="create-team.js" defer></script>
+  <script src="responsivo.js" defer></script>
 </body>
-
-<script src="teams.js" defer></script>
-<script src="layout.js" defer></script>
-<script src="src/create-team.js" defer></script>
-<script src="src/responsivo.js" defer></script>
-
-
 </html>

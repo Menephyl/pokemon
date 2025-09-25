@@ -1,314 +1,104 @@
 // teams.js
-
 document.addEventListener("DOMContentLoaded", async () => {
-  const availableContainer = document.getElementById("available-pokemon");
-  if (!availableContainer) {
-    console.warn("Erro: Elemento #available-pokemon não encontrado!");
-    return;
-  }
-  const teamContainer = document.querySelector(".team-container");
-  if (teamContainer) {
-    teamContainer.classList.add('hidden');
-  }
+  const available = document.getElementById("available-pokemon");
+  const teamSection = document.getElementById("team-section");
+  const cardsWrapper = document.querySelector(".team-cards");
+  const saveArea = document.querySelector(".save-area");
+  let limit = 8, offset = 0;
 
-  let limit = 4;
-  let offset = 0;
-  function createTeamNavigationButtons() {
+  function createPaginationOnce() {
     if (document.getElementById("previous")) return;
-
-    const buttonContainer = document.createElement("div");
-    Object.assign(buttonContainer.style, {
-      position: "relative",
-      display: "flex",
-      top: "40px",
-      justifyContent: "flex-start",
-      gap: "10px",
-      marginBottom: "30px",
-      marginLeft: "40px",
-    });
-
-    const previousButton = document.createElement("button");
-    previousButton.id = "previous";
-    previousButton.textContent = "<< Previous";
-    Object.assign(previousButton.style, {
-      backgroundColor: "red",
-      border: "none",
-      cursor: "pointer",
-      color: "white",
-      fontSize: "13px",
-      padding: "10px 20px",
-      height: "50px",
-    });
-
-    const nextButton = document.createElement("button");
-    nextButton.id = "next";
-    nextButton.textContent = "Next >>";
-    Object.assign(nextButton.style, {
-      backgroundColor: "#2a75bb",
-      border: "none",
-      cursor: "pointer",
-      color: "white",
-      fontSize: "13px",
-      padding: "10px 20px",
-      height: "50px",
-    });
-
-    buttonContainer.append(previousButton, nextButton);
-    document.querySelector(".save-area")?.after(buttonContainer);
-  }
-  // 2) Função de navegação, agora chamando loadPage()
-  function navigationPokemonOptions() {
-    const previousButton = document.getElementById("previous");
-    const nextButton = document.getElementById("next");
-
-    if (previousButton && nextButton) {
-      previousButton.addEventListener("click", async () => {
-        offset = Math.max(0, offset - limit);  // vai para a página anterior
-        await loadPage();                       // <<< INSERIR AQUI
-      });
-      nextButton.addEventListener("click", async () => {
-        offset += limit;                        // avança a página
-        await loadPage();                       // <<< INSERIR AQUI
-      });
-    }
+    const pc = document.createElement("div");
+    pc.classList.add("pagination-container");
+    const prev = document.createElement("button");
+    prev.id = "previous"; prev.textContent = "<< Previous";
+    prev.classList.add("pagination-btn","btn-previous");
+    const next = document.createElement("button");
+    next.id = "next"; next.textContent = "Next >>";
+    next.classList.add("pagination-btn","btn-next");
+    pc.append(prev, next);
+    saveArea.after(pc);
+    prev.addEventListener("click", async () => { offset = Math.max(0, offset - limit); await loadPage(); });
+    next.addEventListener("click", async () => { offset += limit; await loadPage(); });
   }
 
-  // 3) INSIRA DEPOIS de fetchPokemonData() ⬇️
-  // Função que busca só nomes/URLs
-  async function fetchPokemonList(limit = 4, offset = 0) {
-    const res = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
-    );
-    if (!res.ok) throw new Error("Erro ao buscar lista de Pokémons");
-    const { results } = await res.json();
-    return results;
+  async function fetchList(l, o) {
+    const r = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${l}&offset=${o}`);
+    if (!r.ok) throw "";
+    return (await r.json()).results;
+  }
+  async function fetchData(n) {
+    const r = await fetch(`https://pokeapi.co/api/v2/pokemon/${n}`);
+    if (!r.ok) throw "";
+    return await r.json();
   }
 
-  // Função que limpa a tela e redesenha os cards “Disponíveis”
   async function loadPage() {
-    availableContainer.innerHTML = "";         // limpa antigos
-
+    available.innerHTML = "";
     try {
-      // busca lista de { name, url }
-      const list = await fetchPokemonList(limit, offset);
-
-      // para cada nome, busca detalhes e exibe
-      for (const { name } of list) {
-        const pokemon = await fetchPokemonData(name);
-        if (pokemon) displayPokemon(pokemon, availableContainer);
-      }
+      const list = await fetchList(limit, offset);
+      const poks = await Promise.all(list.map(p => fetchData(p.name)));
+      poks.forEach(renderAvailableCard);
     } catch {
-      availableContainer.textContent = "Erro ao carregar Pokémons.";
-    }
-  }
-  // FIM INSERÇÃO PAGINAÇÃO DINÂMICA 
-
-
-  // FUNÇÃO: busca dados de um Pokémon na PokeAPI
-  async function fetchPokemonData(pokemonName) {
-    try {
-      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
-      if (!res.ok) throw new Error("Erro ao buscar Pokémon.");
-      return await res.json();
-    } catch (err) {
-      console.error(err);
+      available.textContent = "Erro ao carregar Pokémons.";
     }
   }
 
-  // FUNÇÃO: exibe um card de Pokémon dentro de um container
-  function displayPokemon(pokemon, container) {
-    const card = document.createElement("figure");
-    card.classList.add("pokemon-card");
-
-    // IMAGEM
-    const imgDiv = document.createElement("div");
-    imgDiv.classList.add("card__image-container");
-    const img = document.createElement("img");
-    img.src = pokemon.sprites.other["official-artwork"].front_default;
-    img.alt = pokemon.name;
-    imgDiv.append(img);
-    // LEGENDA
-    const caption = document.createElement("figcaption");
-    caption.classList.add("card__caption");
-    // NOME
-    const title = document.createElement("h2");
-    title.classList.add("card__name");
-    title.textContent = pokemon.name;
-
-    const type = document.createElement("h4");
-    type.classList.add("card__type");
-    type.textContent = pokemon.types.map(t => t.type.name).join(", ");
-    // BOTÕES
-    const addButton = document.createElement("button");
-    addButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
-    addButton.textContent = "Add Pokémon";
-    addButton.addEventListener("click", () => {
-      if (!teamContainer) return;
-
-      // 1) Revele a seção de time, caso oculto 
-
-      if (teamContainer.classList.contains("hidden")) {
-        teamContainer.classList.remove("hidden");
-        teamContainer.style.display = "flex";
-      }
-
-      // 2) Checa duplicatas pelo nome
-      const exists = [...teamContainer.querySelectorAll(".card__name")]
-        .some(el => el.textContent.toLowerCase() === pokemon.name.toLowerCase());
-      if (exists) {
-        alert(`${pokemon.name} já está no seu time!`);
-        return;
-      }
-      // monta o teamCard iniciado a partir do clone
-      const teamCard = card.cloneNode(true);
-
-      // Remove conteúdo antigo do caption
-      const cap2 = teamCard.querySelector("figcaption");
-      cap2.innerHTML = "";
-
-
-      // 1) atualiza classes de tipo (caso ainda não tenha)
-      teamCard.classList.add(`card--${pokemon.types[0].type.name}`);
-
-      // 2) remove todo o conteúdo de figcaption
-      const cap = teamCard.querySelector("figcaption");
-      cap.innerHTML = "";
-      // REMOVE a imagem original clonada
-      const clonedImgDiv = teamCard.querySelector(".card__image-container");
-      if (clonedImgDiv) clonedImgDiv.remove();
-
-
-
-      const imgDiv = document.createElement("div");
-      imgDiv.classList.add("card__image-container");
-      const img = document.createElement("img");
-      img.src = pokemon.sprites.other["official-artwork"].front_default;
-      img.alt = pokemon.name;
-      imgDiv.appendChild(img);
-
-
-      // 4) title (oculto, mas usado p/ duplicata)
-      const title = document.createElement("h2");
-      title.classList.add("card__name");
-      title.textContent = pokemon.name;
-      title.style.display = "none";
-
-      // 5) input para renomear
-      const nameInput = document.createElement("input");
-      nameInput.classList.add("team-input");
-      nameInput.type = "text";
-      nameInput.placeholder = "put Name";
-
-      const nameLabel = document.createElement("p");
-      nameLabel.classList.add("team-card-name");
-      nameLabel.textContent = pokemon.name;
-
-
-      // 6) botão Remove
-      const deleteBtn = document.createElement("button");
-      deleteBtn.classList.add("delete-btn");
-      deleteBtn.textContent = "Remove";
-      deleteBtn.addEventListener("click", () => {
-        teamCard.remove();
-        if (!teamContainer.querySelector(".pokemon-card")) {
-          teamContainer.classList.add("hidden");
-        }
-      });
-
-      // cria o footer branco
-      const footerDiv = document.createElement("div");
-
-
-      footerDiv.classList.add("team-card-footer");
-      footerDiv.append(nameInput, nameLabel, deleteBtn);
-
-
-      // 7) monta o card
-      cap.append(title, imgDiv, nameInput, footerDiv, deleteBtn,);
-      teamCard.appendChild(cap);
-
-      // 9) Defino os dados que usarei mais tarde ao salvar
-      teamCard.dataset.name = pokemon.name;
-      teamCard.dataset.types = pokemon.types.map(t => t.type.name).join(",");
-      
-      // 8) adiciona ao container do time
-      const cardsWrapper = document.querySelector(".team-cards");
-      cardsWrapper.appendChild(teamCard);
-    });
-
-    const detailsButton = document.createElement("button");
-    detailsButton.classList.add("btn-sm", "btn-danger");
-    detailsButton.textContent = "Detalhes";
-
-    detailsButton.addEventListener("click", () => {
-      const modal = document.getElementById("pokemon-modal");
-      const modalBody = modal.querySelector(".modal-body");
-
-      const gifUrl = `https://play.pokemonshowdown.com/sprites/ani/${pokemon.name.toLowerCase()}.gif`;
-
-      const stats = pokemon.stats.map(stat => {
-        return `<li><strong>${stat.stat.name.replace("-", " ")}:</strong> ${stat.base_stat}</li>`;
-      }).join("");
-
-      const abilities = pokemon.abilities.map((a, i) => {
-        return `<li>${i + 1}° Ability: ${a.ability.name}</li>`;
-      }).join("");
-
-      modalBody.innerHTML = `
-  <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}" />
-  <h2>${pokemon.name}</h2>
-  <p><strong>Type:</strong> ${pokemon.types.map(t => t.type.name).join(", ")}</p>
-  <p><strong>Height:</strong> ${pokemon.height / 10} cm</p> 
-  <p><strong>Weight:</strong> ${pokemon.weight / 10} kg</p>
-
-  <div class="modal-section">
-    <h3>Stats:</h3>
-    <ul>${stats}</ul>
-  </div>
-
-  <div class="modal-section">
-    <h3>Abilities:</h3>
-    <ul>${abilities}</ul>
-  </div>
-
-  <img src="${gifUrl}" alt="${pokemon.name} animated sprite" class="pixel-sprite" />
-  
-`;
-
-
-      modal.classList.remove("hidden");
-    });
-
-    // fecha modal ao clicar no X
-    document.querySelector(".modal-close").addEventListener("click", () => {
-      document.getElementById("pokemon-modal").classList.add("hidden");
-    });
-
-    // fecha modal ao clicar fora
-    document.getElementById("pokemon-modal").addEventListener("click", e => {
-      if (e.target.id === "pokemon-modal") {
-        e.target.classList.add("hidden");
-      }
-    });
-
-
-
-
-    caption.append(addButton, title, type, detailsButton);
-    card.append(imgDiv, caption);
-    container.append(card);
+  function renderAvailableCard(p) {
+    const f = document.createElement("figure");
+    f.classList.add("pokemon-card");
+    f.innerHTML = `
+      <div class="card__image-container">
+        <img src="${p.sprites.other['official-artwork'].front_default}" alt="${p.name}">
+      </div>
+      <figcaption class="card__caption">
+        <button class="btn btn-sm btn-outline-secondary">Add Pokémon</button>
+        <button class="btn-sm btn-danger">Details</button>
+      </figcaption>`;
+    f.querySelector(".btn-outline-secondary").addEventListener("click", () => addToTeam(p));
+    f.querySelector(".btn-danger").addEventListener("click", () => openDetails(p));
+    available.appendChild(f);
   }
 
-  // PRIMEIRO: crio botões e configuro eventos
-  createTeamNavigationButtons();
-  navigationPokemonOptions();
+  function addToTeam(pokemon) {
+    teamSection.classList.remove("hidden");
+    const fig = document.createElement("figure");
+    fig.classList.add("pokemon-card", `card--${pokemon.types[0].type.name}`);
+    fig.innerHTML = `
+      <div class="card__image-container">
+        <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}">
+      </div>
+      <figcaption class="card__caption">
+        <input type="text" class="team-input" placeholder="put Name">
+        <p class="team-card-name">${pokemon.name}</p>
+        <button class="delete-btn">Remove</button>
+      </figcaption>`;
+    fig.querySelector(".delete-btn").addEventListener("click", () => fig.remove());
+    cardsWrapper.appendChild(fig);
+  }
 
+  function openDetails(p) {
+    const m = document.getElementById("pokemon-modal");
+    const b = m.querySelector(".modal-body");
+    const gif = `https://play.pokemonshowdown.com/sprites/ani/${p.name.toLowerCase()}.gif`;
+    const stats = p.stats.map(s => `<li><strong>${s.stat.name}:</strong> ${s.base_stat}</li>`).join("");
+    const abs = p.abilities.map((a,i) => `<li>${i+1}° ${a.ability.name}</li>`).join("");
+    b.innerHTML = `
+      <img src="${p.sprites.other['official-artwork'].front_default}" alt="${p.name}">
+      <h2>${p.name}</h2>
+      <ul>${stats}</ul>
+      <ul>${abs}</ul>
+      <img src="${gif}" class="pixel-sprite">`;
+    m.classList.remove("hidden");
+  }
 
-  // CARREGA E EXIBE OS POKÉMON iniciais
-  createTeamNavigationButtons();
-  navigationPokemonOptions();
+  document.querySelector(".modal-close")?.addEventListener("click", () => {
+    document.getElementById("pokemon-modal")?.classList.add("hidden");
+  });
+  document.getElementById("pokemon-modal")?.addEventListener("click", e => {
+    if (e.target.id === "pokemon-modal") e.target.classList.add("hidden");
+  });
+
+  createPaginationOnce();
   await loadPage();
-
-
-
 });

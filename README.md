@@ -108,3 +108,14 @@ Durante o desenvolvimento, foram aplicados conceitos importantes de:
 1. Clone o repositório:
    ```bash
    git clone https://github.com/seu-usuario/poketeam-challenge.git
+
+ 2  - Acesse a pasta do projeto:
+cd poketeam-challenge
+
+3 - Abra o index.html ou execute um servidor estático:
+npx serve
+
+
+4 - Navegue até http://localhost:3000 e comece a usar!
+
+

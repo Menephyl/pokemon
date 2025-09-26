@@ -1,0 +1,15 @@
+@media screen and (max-width: 768px) {
+    body {
+        background-color: rgb(254, 254, 254);
+    }
+ .nav-base{
+    margin-bottom: 10px;
+ }
+ .pagination-container{
+    margin-bottom: 10px;
+ }
+ .delete-btn{
+padding: 6px;
+margin-left: -2px;
+ }
+}

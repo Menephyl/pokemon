@@ -6,7 +6,9 @@
   <link rel="icon" href="https://cdn.pixabay.com/photo/2016/09/01/09/31/pokemon-1635610_960_720.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/src/style.css" />
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="/src/index.css">
+  <link rel="stylesheet" href="src/responsivo.css">
+
   <title>POKÉDEX - My teams page</title>
 </head>
 
@@ -29,12 +31,12 @@
 
   </div>
 
-  
+
   <!-- Mensagem quando não há teams -->
   <h1 id="no-teams-msg" class="team-status">No teams found</h1>
 
   <!-- Container da tabela, escondido por padrão -->
-  <div id="teams-container" class="hidden">
+  <div id="teams-container" class="hidden  teams-table-wrapper">
     <h2>My Teams</h2>
     <table id="teams-table" class="teams-table table-blue">
       <thead>
@@ -48,9 +50,19 @@
       <tbody id="team-table-body"></tbody>
     </table>
   </div>
-
+  <main>
+ <section id="last-team" class="last-team hidden">
+  <h3>Último time salvo</h3>
+  <div class="last-pokemon-grid"></div>
+</section>
+</main>
+  <script src="./src/layout.js" defer></script>
   <script src="src/main.js" defer></script>
   <script src="src/team-list.js" defer></script>
+  <script src="src/createTeams.js" defer></script>
+  <script src="src/teams.js" defer></script>
+  <script src="src/responsivo.js" defer></script>
+  <script src="src/index.js" defer></script>
 </body>
 
 </html>

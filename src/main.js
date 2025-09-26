@@ -1,115 +1,93 @@
-
-document.addEventListener("DOMContentLoaded", function () {
- document.body.style.fontFamily = "Russo One,sans-serif";
-  document.body.style.backgroundColor = "#f4f4f4";
-  document.body.style.textAlign = "center";
-
-  let header = document.querySelector("header");
-  Object.assign(header.style, {
-    backgroundColor: "#ffcb05",
-    padding: "5rem",
-    fontSize: "2.5rem",
-    color: "#2a75bb",
-  });
-
-  let menu = document.getElementById("menu");
-  menu.style.backgroundColor = "#fff";
-
-  let links = document.querySelector(".links");
-  Object.assign(links.style, {
-    backgroundColor: "#fff",
-    display: "flex",
-    flexDirection:"row",
-    justifyContent: "right",
-    textAlign:'auto',
-    alignContent:"auto",
-    gap: "1rem",
-    marginTop: "1rem",
-    marginLeft:'auto',
-    fontFamily:'RussoOne',
-
-
-  });
-
-  function styleMenuButton(button) {
-    Object.assign(button.style, {
-      color: "black",
-      textDecoration: "none",
-      padding: "0.5rem 1rem",
-      borderRadius: "0.5rem",
-      transition: "background-color 0.3s",
-
-    });
-
-    button.addEventListener("mouseenter", () => {
-      button.style.backgroundColor = "#ffcb05";
-    });
-    button.addEventListener("mouseleave", () => {
-      button.style.backgroundColor = "transparent";
-    });
-  }
-
-  const teamStatutsTitle = document.querySelector('.team-status')
-
-  Object.assign(teamStatutsTitle.style,{
-    paddingTop:'40px',
-    fontWeight:'200',
-    
-    
-  })
-
-
-
-  const myTeamsBtn = document.querySelector(".btn-menu");
-  const createTeamBtn = document.querySelector(".btn-menu2");
-  styleMenuButton(myTeamsBtn);
-  styleMenuButton(createTeamBtn);
-
-  myTeamsBtn.style.fontWeight = "bold";
-  myTeamsBtn.style.textDecoration = "underline";
- 
-
- 
-
-  const createTeamMainBtn = document.createElement("button"); 
-  
-  // o botao create team é da tela inicial entao tem que ficar 
-
-  createTeamMainBtn.textContent = "Create Team";
-  Object.assign(createTeamMainBtn.style, {
-    padding: "1rem 2rem",
-    backgroundColor: "#2a75bb",
-    color: "white",
-    border: "none",
-    borderRadius: "0.5rem",
-    cursor: "pointer",
-    fontSize: "1.2rem",
-    marginTop: "1.5rem",
-  });
-  createTeamMainBtn.addEventListener('click', function(event){
-    window.location.href =' createTeams.html'
-  })
-  document.body.insertBefore(createTeamMainBtn, document.querySelector("main"));
-
+// main.js
 document.addEventListener("DOMContentLoaded", () => {
-  const container    = document.getElementById("teams-container");
-  const noTeamsMsg   = document.getElementById("no-teams-msg");
-  const tbody        = document.getElementById("team-table-body");
-  const savedTeams   = JSON.parse(localStorage.getItem("pokeTeams")) || [];
+  document.body.classList.add("body-base");
+  document.querySelector("header")?.classList.add("header-base");
+  document.getElementById("menu")?.classList.add("menu-base");
+  document.getElementById("nav")?.classList.add("nav-base");
+  document.querySelector(".links")?.classList.add("links-base");
 
-  if (savedTeams.length === 0) {
-    container.classList.add("hidden");
-    noTeamsMsg.classList.remove("hidden");
-    return;
+  const myBtn = document.querySelector(".btn-menu");
+  const crtBtn = document.querySelector(".btn-menu2");
+  [myBtn, crtBtn].forEach(b => b?.classList.add("menu-btn"));
+  myBtn?.classList.add("active-btn");
+  document.querySelector(".team-status")?.classList.add("status-title");
+
+  if (!document.querySelector(".create-team-main-btn")) {
+    const btn = document.createElement("button");
+    btn.textContent = "Create Team";
+    btn.classList.add("create-team-main-btn");
+    btn.addEventListener("click", () => location.href = "createTeams.html");
+    document.querySelector("main")?.before(btn);
   }
 
-  
+  document.querySelector(".save-area")?.classList.add("create-main");
 
-  // (mantenha aqui a lógica de delete/edit já implementada)
+  const cont = document.getElementById("teams-container");
+  const msg  = document.getElementById("no-teams-msg");
+  const body = document.getElementById("team-table-body");
+  const teams = JSON.parse(localStorage.getItem("pokeTeams")) || [];
+
+  if (!teams.length) {
+    msg?.classList.remove("hidden");
+    cont?.classList.add("hidden");
+  } else {
+    msg?.classList.add("hidden");
+    cont?.classList.remove("hidden");
+    body.innerHTML = "";
+    teams.forEach(t => {
+      const tr = document.createElement("tr");
+      tr.id = `team-${t.id}`;
+      tr.innerHTML = `
+        <td>${t.id}</td>
+        <td>${t.name}</td>
+        <td>${t.pokemons.length}</td>
+        <td class="table-actions">
+          <button class="table-btn edit-btn"   data-id="${t.id}">Editar</button>
+          <button class="table-btn delete-btn" data-id="${t.id}">Deletar</button>
+        </td>`;
+      body.appendChild(tr);
+    });
+  }
+
+  body.addEventListener("click", e => {
+    const b = e.target;
+    const id = Number(b.dataset.id);
+    if (b.classList.contains("delete-btn")) {
+      if (!confirm("Deletar?")) return;
+      const upd = teams.filter(x => x.id !== id);
+      localStorage.setItem("pokeTeams", JSON.stringify(upd));
+      location.reload();
+    }
+    if (b.classList.contains("edit-btn")) {
+      location.href = `createTeams.html?edit=${id}`;
+    }
+  });
+
+  renderLastTeam();
 });
- 
-});
 
-
-
-
+function renderLastTeam() {
+  const arr = JSON.parse(localStorage.getItem("pokeTeams")) || [];
+  if (!arr.length) return;
+  const last = arr[arr.length - 1];
+  const c = document.createElement("div");
+  c.classList.add("last-team");
+  c.innerHTML = `<h3>Último time salvo:</h3>`;
+  const g = document.createElement("div");
+  g.classList.add("last-pokemon-grid");
+  last.pokemons.forEach(p => {
+    const card = document.createElement("figure");
+    card.classList.add("pokemon-card", `card--${p.types?.[0]||""}`);
+    card.innerHTML = `
+      <div class="card__image-container">
+        <img src="https://play.pokemonshowdown.com/sprites/ani/${p.originalName.toLowerCase()}.gif"
+             alt="${p.customName||p.originalName}">
+      </div>
+      <figcaption class="card__caption">
+        <p class="card__name">${p.customName||p.originalName}</p>
+      </figcaption>`;
+    g.appendChild(card);
+  });
+  c.appendChild(g);
+  document.querySelector(".create-team-main-btn")?.after(c);
+}

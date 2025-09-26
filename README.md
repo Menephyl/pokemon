@@ -15,6 +15,9 @@ O objetivo principal é permitir que o usuário:
 - Crie seu próprio time de Pokémons  
 - Modifique e remova membros do time  
 - Veja detalhes individuais de cada Pokémon  
+- Defina apelidos customizados para cada Pokémon, exibidos abaixo do nome oficial  
+
+
 
 Cada card de Pokémon adota um design dinâmico: dependendo do tipo (fogo, água, planta etc.), aparece um estilo visual diferente, tornando a interface mais atrativa e imersiva.
 

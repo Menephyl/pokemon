@@ -3,7 +3,10 @@
         background-color: rgb(254, 254, 254);
     }
  .nav-base{
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+ }
+ .create-team-main-btn{
+      margin-top: 20px;
  }
  .pagination-container{
     margin-bottom: 10px;

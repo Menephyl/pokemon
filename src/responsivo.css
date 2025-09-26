@@ -8,4 +8,8 @@
  .pagination-container{
     margin-bottom: 10px;
  }
+ .delete-btn{
+padding: 6px;
+margin-left: -2px;
+ }
 }

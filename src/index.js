@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const storageKey = "pokeTeams"
   const allTeams   = JSON.parse(localStorage.getItem(storageKey) || "[]")
 
-  // elimina duplicados por ID, mantendo a ordem
   const uniqueTeams = Object.values(
     allTeams.reduce((acc, team) => {
       acc[team.id] = team
@@ -11,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, {})
   )
 
-  // popula a tabela de times
+  
   const tbody = document.querySelector(".teams-table tbody")
   tbody.innerHTML = ""
   uniqueTeams.forEach(team => {
@@ -22,16 +21,15 @@ document.addEventListener("DOMContentLoaded", () => {
       <td>${team.name}</td>
       <td>${team.pokemons.length}</td>
       <td>
-        <button class="edit-btn"   data-id="${team.id}">Edit</button>
-        <button class="delete-btn" data-id="${team.id}">Delete</button>
+        <button class="edit-btn"  data-id="${team.id}">Edit</button>
+   
+      <button class="delete-btn" data-id="${team.id}">Delete</button>
       </td>`
     tbody.appendChild(tr)
   })
 
-  // se não tiver nenhum time, encerra aqui
-  if (!uniqueTeams.length) return
 
-  // renderiza o último time salvo
+
   const lastTeam = uniqueTeams.at(-1)
   const section  = document.getElementById("last-team")
   const grid     = section.querySelector(".last-pokemon-grid")
@@ -40,10 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
   grid.innerHTML = ""
 
   lastTeam.pokemons.forEach(p => {
-    // usa originalName para montar a URL do GIF
-    const orig        = p.originalName || p.name
-    const gifUrl      = `https://play.pokemonshowdown.com/sprites/ani/${orig.toLowerCase()}.gif`
-    // exibe customName (o que você digitou em "put Name") ou cai em originalName
+   
+    const orig   = p.originalName || p.name
+    const gifUrl = `https://play.pokemonshowdown.com/sprites/ani/${orig.toLowerCase()}.gif`
+   
     const displayName = p.customName || orig
 
     const fig = document.createElement("figure")

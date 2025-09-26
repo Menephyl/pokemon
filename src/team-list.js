@@ -43,7 +43,7 @@
     teamsCont?.classList.remove('hidden');
     renderTable(teams);
 
-    // Hash: destaca e faz scroll suave
+   
     const { hash } = window.location;
     if (hash) {
       const target = document.querySelector(hash);
@@ -54,7 +54,7 @@
       }
     }
 
-    // Filtro por nome (case-insensitive)
+    
     if (searchInput) {
       let lastValue = '';
       const onSearch = () => {
@@ -69,7 +69,7 @@
       searchInput.addEventListener('input', onSearch);
     }
 
-    // Delegação: Editar / Deletar
+   
     tbody.addEventListener('click', (e) => {
       const btn = e.target;
       if (!(btn instanceof HTMLElement)) return;
@@ -96,4 +96,28 @@
       }
     });
   });
+  document.addEventListener("DOMContentLoaded", () => {
+  const storageKey = "pokeTeams"
+  const allTeams = JSON.parse(localStorage.getItem(storageKey) || "[]")
+  const tbody = document.querySelector(".teams-table tbody")
+
+  allTeams.forEach(team => {
+    const tr = document.createElement("tr")
+    tr.innerHTML = `
+      <td>${team.name}</td>
+      <td>${team.pokemons.length}</td>
+      <td>
+        <button class="edit-btn" data-id="${team.id}">Edit</button>
+        <button class="delete-btn" data-id="${team.id}">Delete</button>
+      </td>`
+    tbody.appendChild(tr)
+  })
+
+  if (allTeams.length) {
+    renderLastTeam(allTeams[allTeams.length - 1])
+  }
+})
+
+
+
 })();

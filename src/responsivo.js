@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Header e navegação
+ 
   document.querySelector("header")?.classList.add("header-base");
   document.getElementById("menu")?.classList.add("menu-base");
   document.getElementById("nav")?.classList.add("nav-base");
@@ -10,11 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   document.querySelector(".btn-menu2")?.classList.add("active-btn");
 
-  // Barra de busca e input
+ 
   document.getElementById("search-bar")?.classList.add("search-bar");
   document.getElementById("name-team")?.classList.add("team-name-input");
 
-  // Texto introdutório
+ 
   const searchBar = document.getElementById("search-bar");
   if (searchBar && !document.querySelector(".intro-text")) {
     const intro = document.createElement("h4");
@@ -23,17 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
     searchBar.appendChild(intro);
   }
 
-  // Área de salvar
+
   document.querySelector(".save-area")?.classList.add("save-area-flex");
   document.querySelector(".r")?.classList.add("save-hint");
   document.getElementById("save-team")?.classList.add("save-btn");
 
-  // Grid de pokémons
+  
   document.querySelectorAll(".grid").forEach(grid => {
     grid.classList.add("pokemon-grid");
   });
 
-  // Botões de paginação
+ 
   if (!document.getElementById("previous")) {
     const buttonContainer = document.createElement("div");
     buttonContainer.classList.add("pagination-container");

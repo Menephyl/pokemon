@@ -48,5 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     stored.push(newTeam);
     localStorage.setItem("pokeTeams", JSON.stringify(stored));
     window.location.href = `index.html#team-${newId}`;
+
+    
   });
 });
